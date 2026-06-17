@@ -1,43 +1,41 @@
 import React, { useState } from 'react';
-import { Check, Code, Zap, ShieldAlert, Car } from 'lucide-react';
+import { Check, Code, Zap, ShieldAlert, Printer } from 'lucide-react';
 import './Benefits.css';
 
 export default function Benefits() {
   const [activeTab, setActiveTab] = useState('aether');
 
-  const legacyCode = `// 🚫 Legacy Supercar Analog Configuration
-struct VehicleSettings {
-  float mechanical_diff_bias = 0.65; // Fixed front-rear
-  float wastegate_pressure = 1.2;     // Turbo mechanical lag
-  int damping_clicks = 8;             // Manual shock adjuster
-  
-  // No real-time sensor network integration
-  char vin_ledger[17] = "LEGACY_DEALER_ID";
-};`;
+  const legacyCode = `; 🚫 Legacy Manual G-Code Coordinates
+G21 ; Set units to millimeters
+G90 ; Absolute positioning
+M104 S200 ; Set extruder temp
+G28 X0 Y0 Z0 ; Home all axes
+G1 F1200 X45.2 Y78.4 Z0.2 E0.035 ; Brittle manual extrusion
+G1 F1500 X47.8 Y80.2 Z0.2 E0.078 ; Hardcoded toolpath`;
 
-  const aetherCode = `//  Aetheria Active Torque & Aero Matrix
-const chassisAllocation = {
-  vin: "AETH-GT-092-2026",
-  torqueVectoring: {
-    frontLeft: 450,  // Nm dynamic
-    frontRight: 450, // Nm dynamic
-    rearActive: 1000 // Nm track bias
+  const aetherCode = `//  Aatheria Dynamic Print Profile
+const printJob = {
+  jobId: "AATH-PRNT-830-2026",
+  materials: {
+    primary: "PEEK-Carbon",
+    supports: "PVA-Soluble"
   },
-  aerodynamics: {
-    spoilerAngle: 24.5, // degrees dynamic
-    venturiVentOpen: true
+  slicerParameters: {
+    layerHeight: 0.02,   // mm (20 microns)
+    infillDensity: 0.40, // 40% Gyroid infill
+    chamberTemp: 80      // °C active control
   },
-  registryStatus: "CHASSIS_LOCKED"
+  queueStatus: "JOB_LOCKED"
 };`;
 
   return (
     <section id="benefits" className="benefits-section section">
       <div className="container benefits-grid">
         <div className="benefits-content">
-          <span className="tagline">Design & Architecture</span>
-          <h2>Reinventing Hypercar Design</h2>
+          <span className="tagline">Process & Efficiency</span>
+          <h2>Reinventing Manufacturing</h2>
           <p className="benefits-lead-text">
-            Break free from mechanical limitations. The Aetheria Hyper-GT replaces traditional mechanics with software-defined performance and active electric vectoring.
+            Break free from tooling limitations. Aatheria replaces traditional injection molds and CNC subtractive milling with software-driven additive fabrication.
           </p>
 
           <div className="benefit-items">
@@ -46,8 +44,8 @@ const chassisAllocation = {
                 <Check size={18} />
               </div>
               <div className="benefit-details">
-                <h4>Instant Dynamic Torque Vectoring</h4>
-                <p>Three high-torque electric motors adjust output per-wheel every microsecond, defeating physical turbo lag.</p>
+                <h4>Zero Tooling Setup Costs</h4>
+                <p>Skip expensive CNC machining start-up overheads. Go straight from CAD file upload to physical printing.</p>
               </div>
             </div>
 
@@ -56,8 +54,8 @@ const chassisAllocation = {
                 <Check size={18} />
               </div>
               <div className="benefit-details">
-                <h4>Active Aerodynamics Package</h4>
-                <p>Venturi ground-effect wind tunnels open and close automatically to stick the vehicle to the road during high-speed cornering.</p>
+                <h4>Infinite Geometric Complexity</h4>
+                <p>Print hollow internal chambers, cooling channels, and nested assemblies that are impossible with subtractive tools.</p>
               </div>
             </div>
 
@@ -66,8 +64,8 @@ const chassisAllocation = {
                 <Check size={18} />
               </div>
               <div className="benefit-details">
-                <h4>Direct Secure Registry Allocation</h4>
-                <p>Skip intermediate dealership markups. Build your vehicle configurations directly into our persistent SQLite digital registry.</p>
+                <h4>90% Less Material Waste</h4>
+                <p>Additive layering deposits raw filaments and powders exactly where needed, reducing high-end composite scrap.</p>
               </div>
             </div>
           </div>
@@ -86,7 +84,7 @@ const chassisAllocation = {
                 className={`code-tab-btn aether ${activeTab === 'aether' ? 'active' : ''}`}
                 onClick={() => setActiveTab('aether')}
               >
-                <Car size={14} /> Aetheria Software
+                <Printer size={14} /> Aatheria Software
               </button>
             </div>
             <div className="code-body">

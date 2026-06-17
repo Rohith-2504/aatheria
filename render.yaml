@@ -1,7 +1,7 @@
-# Aetheria Hyper-GT Render Deployment Blueprint
+# Aatheria 3D Printing Service Render Deployment Blueprint
 services:
   - type: web
-    name: aetheria-hyper-gt
+    name: aatheria
     env: node
     plan: free
     buildCommand: npm run build

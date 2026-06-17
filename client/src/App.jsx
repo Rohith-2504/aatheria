@@ -1,4 +1,4 @@
-// Aetheria Client App Shell - Dynamic Routing & State Controller
+// Aatheria Client App Shell - Dynamic Routing & State Controller
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -24,7 +24,7 @@ export default function App() {
 
   useEffect(() => {
     // Check local storage for active user session
-    const savedUser = localStorage.getItem('aetheria_user');
+    const savedUser = localStorage.getItem('aatheria_user');
     if (savedUser) {
       try {
         const parsed = JSON.parse(savedUser);
@@ -67,7 +67,7 @@ export default function App() {
 
   const handleAuthSuccess = (authenticatedUser) => {
     setUser(authenticatedUser);
-    localStorage.setItem('aetheria_user', JSON.stringify(authenticatedUser));
+    localStorage.setItem('aatheria_user', JSON.stringify(authenticatedUser));
     if (authenticatedUser.role === 'admin') {
       setRoute('admin-dashboard');
     } else {
@@ -77,7 +77,7 @@ export default function App() {
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem('aetheria_user');
+    localStorage.removeItem('aatheria_user');
     setRoute('auth');
   };
 

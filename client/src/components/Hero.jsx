@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Play, Database, Car, Zap, Paintbrush } from 'lucide-react';
+import { ArrowRight, Play, Database, Printer, Zap, FileCode } from 'lucide-react';
 import './Hero.css';
-import carImage from './aetheria_hypercar.png';
+import printerImage from './aatheria_printer.png';
 
 export default function Hero({ onCtaClick }) {
   const [activeNode, setActiveNode] = useState(null);
@@ -44,20 +44,20 @@ export default function Hero({ onCtaClick }) {
   // Listen to form submission events to trigger the interactive processing sequence
   useEffect(() => {
     const handleFormSubmit = () => {
-      // Step 1: Spec Selected
+      // Step 1: Model Ingested
       setProcessingState('captured');
 
-      // Step 2: Custom Paint (starts after 1.2s)
+      // Step 2: Mesh Sliced (starts after 1.2s)
       setTimeout(() => {
         setProcessingState('classifying');
       }, 1200);
 
-      // Step 3: Chassis Registered (starts after 2.4s)
+      // Step 3: Job Registered (starts after 2.4s)
       setTimeout(() => {
         setProcessingState('storing');
       }, 2400);
 
-      // Step 4: Delivery Dispatched (starts after 3.6s)
+      // Step 4: Printing Started (starts after 3.6s)
       setTimeout(() => {
         setProcessingState('responding');
       }, 3600);
@@ -77,33 +77,33 @@ export default function Hero({ onCtaClick }) {
   const nodes = [
     {
       id: 1,
-      title: 'Spec Selected',
-      icon: <Car size="1.2em" />,
-      desc: processingState === 'captured' ? 'Specification initialized via direct build' : 'Powertrain & package selected',
+      title: 'Model Ingested',
+      icon: <FileCode size="1.2em" />,
+      desc: processingState === 'captured' ? 'STL/OBJ verified & bounds checked' : 'CAD mesh loaded successfully',
       color: '#06b6d4',
       isActiveState: processingState === 'captured'
     },
     {
       id: 2,
-      title: 'Bespoke Paint',
-      icon: <Paintbrush size="1.2em" />,
-      desc: processingState === 'classifying' ? "Finish: Liquid Carbon-Purple weave" : 'Custom trim & aero panels selected',
+      title: 'Slicing G-Code',
+      icon: <Printer size="1.2em" />,
+      desc: processingState === 'classifying' ? 'Compiling 20µm layers & support structures' : 'Toolpath path compiling',
       color: '#7c3aed',
       isActiveState: processingState === 'classifying'
     },
     {
       id: 3,
-      title: 'Chassis Registered',
+      title: 'Job Registered',
       icon: <Database size="1.2em" />,
-      desc: processingState === 'storing' ? 'Allocation committed to security ledger' : 'Secure allocation registry log',
+      desc: processingState === 'storing' ? 'Print parameters committed to database' : 'Securing local operation ledger',
       color: '#10b981',
       isActiveState: processingState === 'storing'
     },
     {
       id: 4,
-      title: 'Booking Confirmed',
+      title: 'Printing Started',
       icon: <Zap size="1.2em" />,
-      desc: processingState === 'responding' ? 'Bespoke build slot confirmed' : 'Instant allocation confirmation',
+      desc: processingState === 'responding' ? 'Laser SLS matrix online & firing' : 'Production queue scheduled',
       color: '#f59e0b',
       isActiveState: processingState === 'responding'
     }
@@ -113,15 +113,15 @@ export default function Hero({ onCtaClick }) {
   const getStatusText = () => {
     switch (processingState) {
       case 'captured':
-        return 'Specification initialized, compiling config...';
+        return 'Ingesting CAD mesh, verifying geometry...';
       case 'classifying':
-        return 'Applying bespoke visual trims & aerodynamics...';
+        return 'Generating toolpath layers & G-code...';
       case 'storing':
-        return 'Registering vehicle VIN and chassis slot...';
+        return 'Registering job and spool allocations...';
       case 'responding':
-        return 'Logistics locked. Order confirmation dispatched.';
+        return 'Queue committed. Extrusion matrix online.';
       default:
-        return 'Configurator Online / Direct Allocation';
+        return '3D Printer Online / Queue Ingestion';
     }
   };
 
@@ -129,25 +129,25 @@ export default function Hero({ onCtaClick }) {
     <section id="hero" className="hero-section section animate-fadeIn">
       <div className="container hero-grid">
         <div className="hero-content">
-          <span className="tagline">The Future of Velocity</span>
+          <span className="tagline">The Future of Fabrication</span>
           <h1 className="hero-title">
-            Bespoke Engineering. <span className="text-gradient">Pure Power.</span>
+            Additive Precision. <span className="text-gradient">Flawless Scale.</span>
           </h1>
           <p className="hero-desc">
-            Aetheria Hyper-GT combines carbon-fiber monocoque aerodynamics with a 1,900 HP tri-motor electric powertrain. Custom built to your specifications, registered securely, and delivered globally.
+            Aatheria prints components with aerospace-grade carbon fiber and titanium. Upload your CAD designs, customize structural densities, and queue production immediately.
           </p>
           <div className="hero-actions">
             <a href="#lead-form" onClick={handleCTA} className="btn btn-primary">
-              Build Your Spec <ArrowRight size="1.1em" />
+              Upload CAD & Quote <ArrowRight size="1.1em" />
             </a>
             <a href="#features" onClick={handleSecondary} className="btn btn-secondary">
-              <Play size="1em" /> Explore Specs
+              <Play size="1em" /> Explore Materials
             </a>
           </div>
           <div className="hero-car-preview" style={{ marginTop: '2.5rem' }}>
             <img 
-              src={carImage} 
-              alt="Aetheria Hyper-GT Preview" 
+              src={printerImage} 
+              alt="Aatheria Industrial SLS Printer" 
               style={{
                 width: '100%',
                 maxWidth: '480px',
@@ -168,7 +168,7 @@ export default function Hero({ onCtaClick }) {
                 <span className="dot dot-yellow"></span>
                 <span className="dot dot-green"></span>
               </div>
-              <span className="window-title">Aetheria Configurator — build_pipeline.spec</span>
+              <span className="window-title">Aatheria Additive Controller — build_pipeline.gcode</span>
             </div>
 
             <div className="flow-nodes">

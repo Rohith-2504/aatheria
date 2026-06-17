@@ -28,7 +28,7 @@ export default function LeadForm({ isHighlighted, user }) {
       setFormData(prev => ({
         ...prev,
         full_name: user.full_name || '',
-        email: user.username ? `${user.username}@hyper-gt.com` : ''
+        email: user.username ? `${user.username}@aatheria.com` : ''
       }));
     }
   }, [user]);
@@ -183,25 +183,25 @@ export default function LeadForm({ isHighlighted, user }) {
     <section id="lead-form" className="lead-section section">
       <div className="container lead-container">
         <div className="section-header">
-          <span className="tagline">Secure Allocation</span>
-          <h2>Aetheria GT Allocation Builder</h2>
-          <p>Complete your commission profile to register your bespoke build slot. All details are securely logged to the active chassis registry.</p>
+          <span className="tagline">Secure Print Queue</span>
+          <h2>Aatheria 3D Print Quote Builder</h2>
+          <p>Complete your print profile to register your bespoke print job slot. Spool weight and parameters are logged live to our active print queue.</p>
         </div>
 
         <div className={`lead-card-wrapper glassmorphic-panel ${isHighlighted ? 'highlighted' : ''}`}>
           {submitSuccess ? (
             <div className="success-screen">
               <CheckCircle2 className="success-icon" size={64} />
-              <h3>Allocation Profile Registered!</h3>
+              <h3>Print Request Registered!</h3>
               <p className="success-message">
-                Your bespoke configuration was successfully validated and committed to the Aetheria Registry.
+                Your print specifications were successfully validated and committed to the Aatheria queue.
               </p>
               <div className="success-details">
-                <p><strong>Registry Database:</strong> server/data/submissions.db</p>
-                <p><strong>Registry Table:</strong> submissions</p>
+                <p><strong>Queue Database:</strong> server/data/submissions.db</p>
+                <p><strong>Queue Table:</strong> submissions</p>
               </div>
               <button onClick={handleResetForm} className="btn btn-primary">
-                Configure Another Build
+                Configure Another Job
               </button>
             </div>
           ) : (
@@ -288,7 +288,7 @@ export default function LeadForm({ isHighlighted, user }) {
               {/* Tier Selection Dropdown */}
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="tier">Configuration Spec Tier</label>
+                  <label htmlFor="tier">Spool Material & Tech Tier</label>
                   <select
                     id="tier"
                     name="tier"
@@ -307,15 +307,15 @@ export default function LeadForm({ isHighlighted, user }) {
                       boxSizing: 'border-box'
                     }}
                   >
-                    <option value="standard" style={{ background: '#03000a' }}>Chassis Standard ($240,000)</option>
-                    <option value="track" style={{ background: '#03000a' }}>Track Edition ($320,000)</option>
-                    <option value="bespoke" style={{ background: '#03000a' }}>Bespoke Signature (Custom)</option>
+                    <option value="standard" style={{ background: '#03000a' }}>Rapid Prototyping - FDM PLA ($49 base)</option>
+                    <option value="track" style={{ background: '#03000a' }}>Engineering Grade - SLA Resin ($199 base)</option>
+                    <option value="bespoke" style={{ background: '#03000a' }}>Industrial Metals - SLS Titanium (Custom)</option>
                   </select>
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Bespoke Specifications / Trim & Options</label>
+                <label htmlFor="message">Print Dimensions, Structural Density, or layer height goals (cc)</label>
                 <textarea
                   id="message"
                   name="message"
@@ -323,7 +323,7 @@ export default function LeadForm({ isHighlighted, user }) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   rows={4}
-                  placeholder="Describe your bespoke options (e.g. Paint finish, Interior Alcantara color, Track package details - minimum 10 characters)..."
+                  placeholder="Describe your printing goals (e.g. 40% Gyroid infill density, SLA clear resin, STL file download link - minimum 10 characters)..."
                   className={touched.message && errors.message ? 'invalid' : ''}
                 ></textarea>
                 {touched.message && errors.message && (
@@ -338,11 +338,11 @@ export default function LeadForm({ isHighlighted, user }) {
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 size={18} className="spinner" /> Registering Allocation...
+                    <Loader2 size={18} className="spinner" /> Queueing Print Job...
                   </>
                 ) : (
                   <>
-                    <Send size={18} /> Reserve Your Hypercar
+                    <Send size={18} /> Queue Print Job
                   </>
                 )}
               </button>

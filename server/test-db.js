@@ -10,9 +10,9 @@ try {
   const result = insert.run(
      'Test User',
      '+1234567890',
-     'client@hyper-gt.com',
+     'client@aatheria.com',
      'San Francisco',
-     'Liquid Carbon-Purple weave finish with Track Edition aerodynamic package.'
+     'Rapid prototyping FDM PLA, 40% gyroid infill, 100 microns layer height'
   );
   
   console.log('Insert Result:', result);

@@ -5,25 +5,25 @@ import './Testimonials.css';
 export default function Testimonials() {
   const reviews = [
     {
-      name: 'Marcus Vance',
-      role: 'Chief Editor at Apex Magazine',
-      text: 'The Aetheria Hyper-GT is an absolute paradigm shift. Launching this tri-motor beast out of a corner feels like breaking the laws of physics. The torque vectoring reacts faster than human synapses.',
+      name: 'Dr. Aris Vance',
+      role: 'Chief Engineer at AeroOrbit',
+      text: "Aatheria's titanium DMLS prints were a complete game-changer for our satellite brackets. The micrometer precision achieved weight-savings and micro-tolerances we couldn't get from subtractive tooling.",
       stars: 5,
-      initials: 'MV',
+      initials: 'AV',
       gradient: 'linear-gradient(135deg, #7c3aed, #06b6d4)'
     },
     {
       name: 'Clara Dubois',
-      role: 'Pro Racing Driver & Development Pilot',
-      text: 'We pushed the Track Edition at Nürburgring. The active ground-effects and AI suspension keeping 1,900 HP glued to the tarmac is a masterclass in dynamic engineering. Truly breathtaking.',
+      role: 'Hardware Lead at BioMed Labs',
+      text: 'We printed microfluidic valves using their soluble support structures. The internal cavities came out perfectly smooth, clean, and completely free of composite residues. Outstanding detail.',
       stars: 5,
       initials: 'CD',
       gradient: 'linear-gradient(135deg, #06b6d4, #3b82f6)'
     },
     {
       name: 'Viktor Sterling',
-      role: 'Bespoke Collector & Client',
-      text: 'The allocation and design process was completely seamless. Ordering my one-of-one Liquid Carbon commission was done directly through their secure registry, and the delivery was pristine.',
+      role: 'Founder of VeloDesigns',
+      text: 'Uploading STL mesh profiles, selecting our spool parameters, and registering the print job was done in minutes. The active heated chamber kept our carbon fiber shells perfectly straight.',
       stars: 5,
       initials: 'VS',
       gradient: 'linear-gradient(135deg, #ec4899, #7c3aed)'
@@ -34,9 +34,9 @@ export default function Testimonials() {
     <section id="testimonials" className="testimonials-section section">
       <div className="container">
         <div className="section-header">
-          <span className="tagline">Test Pilots</span>
-          <h2>What the Experts Say</h2>
-          <p>Read performance reports and initial driving impressions from top automotive publications and test pilots.</p>
+          <span className="tagline">Client Feedback</span>
+          <h2>What Product Designers Say</h2>
+          <p>Read reviews from aerospace engineers, industrial designers, and medical device hardware architects.</p>
         </div>
 
         <div className="testimonials-grid">

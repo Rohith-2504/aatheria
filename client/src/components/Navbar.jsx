@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Car } from 'lucide-react';
+import { Menu, X, Printer } from 'lucide-react';
 import './Navbar.css';
 
 export default function Navbar({ onCtaClick, user, onLogout }) {
@@ -46,22 +46,22 @@ export default function Navbar({ onCtaClick, user, onLogout }) {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         <a href="#" className="nav-logo" onClick={(e) => handleNavClick(e, 'hero')}>
-          <Car className="logo-icon" size={24} />
-          <span>AETHERIA</span>
+          <Printer className="logo-icon" size={24} />
+          <span>AATHERIA</span>
         </a>
 
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <a href="#features" onClick={(e) => handleNavClick(e, 'features')}>Specs</a>
-          <a href="#benefits" onClick={(e) => handleNavClick(e, 'benefits')}>Design</a>
-          <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>Allocation</a>
-          <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')}>Reviews</a>
+          <a href="#features" onClick={(e) => handleNavClick(e, 'features')}>Materials</a>
+          <a href="#benefits" onClick={(e) => handleNavClick(e, 'benefits')}>Process</a>
+          <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>Pricing</a>
+          <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')}>Feedback</a>
           <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')}>FAQ</a>
           <a 
             href="#lead-form" 
             className="btn btn-primary nav-cta" 
             onClick={(e) => handleNavClick(e, 'lead-form')}
           >
-            Reserve Now
+            Build Quote
           </a>
           {user && (
             <div className="nav-user-section">

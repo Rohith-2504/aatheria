@@ -7,24 +7,24 @@ export default function Faq() {
 
   const faqs = [
     {
-      q: 'How does the digital allocation registry secure my reservation?',
-      a: 'When you submit your configuration build, a secure registry token is generated and bound to your details in our database ledger. This reserves a physical chassis and VIN slot on our assembly line in chronological order of submission.'
+      q: 'What file formats are supported for print uploads?',
+      a: 'We support standard STL, OBJ, and STEP vector file formats. All uploads are dynamically parsed and run through automatic mesh checks before they are sliced.'
     },
     {
-      q: 'What details can I customize in my bespoke GT commission?',
-      a: 'Aetheria offers a complete styling configurator. You can request bespoke paint options (such as liquid carbon tints), specific interior cabin materials (such as hand-stitched Alcantara), steering wheel ergonomics, and track-suspension tuning characteristics.'
+      q: 'How does the active temperature chamber improve print quality?',
+      a: "Aatheria's printers utilize active heated build envelopes (up to 200°C). By keeping ambient heat high during printing, we reduce internal stresses, preventing composite shrinkage and delamination."
     },
     {
-      q: 'How can I view and monitor my active allocation status?',
-      a: 'Once registered, your submission status is logged live in the Active Allocation Registry at the bottom of this page. As manufacturing steps begin (from chassis alignment to paint applications), you can track progress directly.'
+      q: 'How is my print queue spot and pricing calculated?',
+      a: 'Pricing is based on structural volume (cc) and material selected (Rapid Prototyping, Engineering, Metals). Once you submit a quote request, the spool weight is logged to our database queue in real-time.'
     },
     {
-      q: 'Is the deposit fully refundable if my plans change?',
-      a: 'Yes. Standard and Track Edition allocation deposits are 100% refundable up until the physical chassis registry takes place (typically 14 days post-validation). Bespoke Signature commissions require a non-refundable custom panel deposit once engineering blueprints are signed.'
+      q: 'Can I request post-print finishing and threaded tapping?',
+      a: 'Yes. For Engineering and Industrial Metal tiers, we offer high-tolerance post-processing, including CNC thread tapping, surface sandblasting, and media polishing.'
     },
     {
-      q: 'What charging standards does Aetheria support?',
-      a: 'Our quantum-battery energy cells utilize a dual-voltage high-capacity battery pack compatible with both NACS (Tesla Supercharger network) and CCS high-speed charging protocols, allowing for a 10% to 80% charge in just 15 minutes.'
+      q: 'What materials are available for printing?',
+      a: 'We carry standard PLA, ABS, PETG, high-temp nylon, SLA resin photopolymers, carbon fiber composites, and direct-metal sintered titanium.'
     }
   ];
 
@@ -38,7 +38,7 @@ export default function Faq() {
         <div className="section-header">
           <span className="tagline">Got Questions?</span>
           <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know about the allocation process, design customizations, active vehicle support, and battery charging.</p>
+          <p>Everything you need to know about supported file formats, material tolerances, queue slots, and post-processing.</p>
         </div>
 
         <div className="faq-list">

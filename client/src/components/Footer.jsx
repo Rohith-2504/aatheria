@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Car, Github, Twitter, Linkedin, Sparkles } from 'lucide-react';
+import { Printer, Github, Twitter, Linkedin, Sparkles } from 'lucide-react';
 import './Footer.css';
 
 export default function Footer() {
@@ -27,11 +27,11 @@ export default function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <a href="#" className="footer-logo" onClick={handleLogoClick}>
-            <Car className="logo-icon" size={24} />
-            <span>AETHERIA</span>
+            <Printer className="logo-icon" size={24} />
+            <span>AATHERIA</span>
           </a>
           <p className="footer-brand-desc">
-            Experience the pinnacle of electric velocity. 1,900 HP tri-motor drivetrain, active aerodynamics, and bespoke configurations.
+            Experience the pinnacle of high-precision additive manufacturing. Ultra-fine microstructures, engineering-grade materials, and rapid SLS/DMLS metal printing.
           </p>
           <div className="social-links">
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -48,24 +48,24 @@ export default function Footer() {
 
         <div className="footer-links-column">
           <h4>Product</h4>
-          <a href="#features">Specs</a>
-          <a href="#benefits">Design</a>
-          <a href="#pricing">Allocation</a>
-          <a href="#testimonials">Reviews</a>
+          <a href="#features">Materials</a>
+          <a href="#benefits">Process</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#testimonials">Feedback</a>
           <a href="#faq">FAQ</a>
         </div>
 
         <div className="footer-links-column">
           <h4>Resources</h4>
           <a href="#features">Technical Specs</a>
-          <a href="#benefits">Configurator</a>
-          <a href="#lead-form">Active Registry</a>
+          <a href="#benefits">Slicing Engine</a>
+          <a href="#lead-form">Quote Builder</a>
           <a href="#faq">System Status</a>
         </div>
 
         <div className="footer-newsletter">
           <h4>Stay Configured</h4>
-          <p>Subscribe to receive engineering updates, allocation availability, and exclusive event invitations.</p>
+          <p>Subscribe to receive engineering updates, printing queue status, and new material tier announcements.</p>
           {subscribed ? (
             <div className="newsletter-success">
               <Sparkles size={14} />
@@ -75,7 +75,7 @@ export default function Footer() {
             <form onSubmit={handleSubscribe} className="newsletter-form">
               <input
                 type="email"
-                placeholder="client@hyper-gt.com"
+                placeholder="operator@aatheria.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -88,7 +88,7 @@ export default function Footer() {
       </div>
 
       <div className="container footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Aetheria Automotive Ltd. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Aatheria 3D Printing Services. All rights reserved.</p>
         <div className="footer-bottom-links">
           <a href="#faq">Privacy Policy</a>
           <a href="#faq">Terms of Service</a>

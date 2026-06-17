@@ -6,11 +6,11 @@ export default function Preloader({ fade }) {
   const [progress, setProgress] = useState(0);
 
   const logs = [
-    'INITIALIZING HYPER-GT POWERGRID...',
-    'CALIBRATING TRI-MOTOR SYSTEM CHECKS...',
-    'SYNCHRONIZING ACTIVE DIFFERENTIAL VECTORING...',
-    'INGESTING DRIVER CALIBRATIONS & SUSPENSION GEOMETRY...',
-    'AETHERIA SYSTEM ONLINE. DRIVE READY.'
+    'CALIBRATING THERMISTORS & BED HEATING MATRIX...',
+    'SYNCHRONIZING TRIAXIAL STEPPER MOTOR DRIVERS...',
+    'INITIALIZING DYNAMIC BED LEVELING SENSORS...',
+    'HEATING NOZZLE EXTRUDER ASSEMBLY [230°C]...',
+    'AATHERIA 3D PRINTER ONLINE. READY TO INGEST MESH.'
   ];
 
   useEffect(() => {
@@ -59,10 +59,10 @@ export default function Preloader({ fade }) {
         </div>
 
         <h1 className="preloader-title">
-          <span>AETHERIA</span>
+          <span>AATHERIA</span>
         </h1>
         
-        <p className="preloader-subtitle text-gradient">ALL-ELECTRIC VELOCITY</p>
+        <p className="preloader-subtitle text-gradient">HIGH-PRECISION ADDITIVE MANUFACTURING</p>
 
         <div className="preloader-progress-container">
           <div className="preloader-progress-bar" style={{ width: `${progress}%` }} />

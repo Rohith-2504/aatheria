@@ -36,6 +36,15 @@ db.exec(`
   )
 `);
 
+// Seed default users if table is empty
+const userCountResult = db.prepare('SELECT COUNT(*) as count FROM users').get();
+if (userCountResult && userCountResult.count === 0) {
+  const insertUser = db.prepare('INSERT INTO users (username, password, full_name, role) VALUES (?, ?, ?, ?)');
+  insertUser.run('admin', 'admin123', 'System Operator', 'admin');
+  insertUser.run('client', 'client123', 'Jane Doe', 'user');
+  console.log('Seeded default user and admin accounts.');
+}
+
 // Dynamically migrate submissions table to include tier and status columns
 try {
   const tableInfo = db.prepare("PRAGMA table_info(submissions)").all();

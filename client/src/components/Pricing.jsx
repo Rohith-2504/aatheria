@@ -5,50 +5,50 @@ import './Pricing.css';
 export default function Pricing() {
   const tiers = [
     {
-      name: 'Chassis Standard',
-      price: '$240,000',
-      period: 'base allocation',
-      desc: 'High-performance all-electric hyper-GT base build with standard specifications.',
+      name: 'Rapid Prototyping',
+      price: '$49',
+      period: 'per print job',
+      desc: 'Lightweight FDM prints using standard PLA, PETG, and ABS polymers.',
       features: [
-        'Tri-Motor 1,200 HP Powertrain',
-        'Liquid-cooled lithium cell core (350-mi)',
-        'Standard carbon aerodynamics',
-        'Factory paint palette options',
-        'Secure digital VIN registry reservation'
+        'FDM (Fused Deposition Modeling)',
+        'Standard filaments (PLA, ABS, PETG)',
+        'Layer resolution down to 100 microns',
+        'Standard infill structures (Rectilinear)',
+        'Next-day local pickup/delivery'
       ],
-      cta: 'Reserve Standard Spec',
+      cta: 'Configure FDM Job',
       popular: false
     },
     {
-      name: 'Track Edition',
-      price: '$320,000',
-      period: 'performance spec',
-      desc: 'Track-ready performance package with active aerodynamics and suspension.',
+      name: 'Engineering Grade',
+      price: '$199',
+      period: 'per print job',
+      desc: 'High-strength SLA resin and FDM composite parts using carbon fiber.',
       features: [
-        'Full 1,900 HP upgrade (torque vectoring)',
-        'Active ground-effects & wing spoilers',
-        'Track-calibrated AI active dampers',
-        'Carbon ceramic brakes + Michelin Cup 2 R',
-        'Integrated telemetry & data log storage',
-        'Priority build allocation (12-mo delivery)'
+        'Dual-nozzle PEEK & Carbon Fiber spools',
+        'SLA (Stereolithography) liquid photopolymer',
+        'Layer resolution down to 20 microns',
+        'Dynamic infill structures (Gyroid/Hexagonal)',
+        'Soluble polymer supports package',
+        'Priority print queue scheduling'
       ],
-      cta: 'Reserve Track Spec',
+      cta: 'Configure SLA Job',
       popular: true
     },
     {
-      name: 'Bespoke Signature',
+      name: 'Industrial Metals',
       price: 'Custom',
-      period: 'tailored commission',
-      desc: 'One-of-one custom commission built to your exact design blueprints.',
+      period: 'tailored blueprints',
+      desc: 'Direct Metal Laser Sintering (DMLS) for production steel and titanium.',
       features: [
-        'Custom hand-laid colored carbon-fiber weave',
-        'Tailored Italian Alcantara cabin design',
-        '1-on-1 access to Aetheria design lead',
-        'Dedicated trackside race engineer support',
-        'Global enclosed transporter delivery',
-        'Lifetime allocation maintenance support'
+        'Direct Metal Laser Sintering (DMLS)',
+        'Sintered titanium, steel, and aluminum',
+        'Aerospace-certified structural density',
+        'Post-print CNC threading and finishing',
+        '1-on-1 print engineer file validation',
+        'Global enclosed shipping logistics'
       ],
-      cta: 'Inquire Bespoke Build',
+      cta: 'Request Metal Quote',
       popular: false
     }
   ];
@@ -72,9 +72,9 @@ export default function Pricing() {
     <section id="pricing" className="pricing-section section">
       <div className="container">
         <div className="section-header">
-          <span className="tagline">Allocation Tiers</span>
-          <h2>Secure Your Commission</h2>
-          <p>Select your base configuration tier. Every allocation reserves a slot in our security registry.</p>
+          <span className="tagline">Printing Tiers</span>
+          <h2>Select Your Configuration</h2>
+          <p>Choose your material and technology tier. Every request instantiates a secure spool allocation.</p>
         </div>
 
         <div className="pricing-grid">

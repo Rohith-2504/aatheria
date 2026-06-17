@@ -58,26 +58,37 @@ export default function AdminDashboard({ user, onLogout }) {
   // Compute metrics
   const totalRequests = leadsList.length;
   const pendingOrders = leadsList.filter(item => item.status === 'pending').length;
-  const soldOrders = leadsList.filter(item => item.status === 'sold').length;
+  const completedPrints = leadsList.filter(item => item.status === 'sold').length;
 
   const calculateEarnings = () => {
     return leadsList.reduce((sum, item) => {
       if (item.status !== 'sold') return sum;
-      if (item.tier === 'track') return sum + 320000;
-      if (item.tier === 'bespoke') return sum + 450000;
-      return sum + 240000; // standard
+      if (item.tier === 'track') return sum + 199;
+      if (item.tier === 'bespoke') return sum + 1500;
+      return sum + 49;
     }, 0);
   };
 
   const totalEarnings = calculateEarnings();
+
+  const calculateVolume = () => {
+    return leadsList.reduce((sum, item) => {
+      if (item.status !== 'sold') return sum;
+      if (item.tier === 'track') return sum + 250;
+      if (item.tier === 'bespoke') return sum + 750;
+      return sum + 120; // in cc
+    }, 0);
+  };
+
+  const totalVolume = calculateVolume();
 
   return (
     <div className="admin-container animate-fadeIn">
       <div className="admin-header glassmorphic-panel">
         <div className="admin-title-row">
           <div>
-            <span className="tagline">Registry Management</span>
-            <h2>Aetheria Registry Control</h2>
+            <span className="tagline">Operator Dashboard</span>
+            <h2>Aatheria Print Queue Control</h2>
           </div>
           <div className="admin-user-badge">
             <span className="user-indicator admin"></span>
@@ -96,9 +107,9 @@ export default function AdminDashboard({ user, onLogout }) {
             <DollarSign size={24} />
           </div>
           <div className="metric-details">
-            <span className="metric-label">Total Earnings</span>
+            <span className="metric-label">Total Revenue</span>
             <h3 className="metric-val">${totalEarnings.toLocaleString()}</h3>
-            <span className="metric-meta">From sold configurations</span>
+            <span className="metric-meta">From completed print jobs</span>
           </div>
         </div>
 
@@ -107,9 +118,9 @@ export default function AdminDashboard({ user, onLogout }) {
             <ShoppingBag size={24} />
           </div>
           <div className="metric-details">
-            <span className="metric-label">Allocations Sold</span>
-            <h3 className="metric-val">{soldOrders}</h3>
-            <span className="metric-meta">Chassis registry locked</span>
+            <span className="metric-label">Volume Printed</span>
+            <h3 className="metric-val">{totalVolume} cc</h3>
+            <span className="metric-meta">Extruded polymers & metals</span>
           </div>
         </div>
 
@@ -118,9 +129,9 @@ export default function AdminDashboard({ user, onLogout }) {
             <Clock size={24} />
           </div>
           <div className="metric-details">
-            <span className="metric-label">Pending Builds</span>
+            <span className="metric-label">Pending Queue</span>
             <h3 className="metric-val">{pendingOrders}</h3>
-            <span className="metric-meta">Needs validation & registration</span>
+            <span className="metric-meta">Awaiting slicer queue execution</span>
           </div>
         </div>
 
@@ -129,9 +140,9 @@ export default function AdminDashboard({ user, onLogout }) {
             <FileText size={24} />
           </div>
           <div className="metric-details">
-            <span className="metric-label">Total Requests</span>
+            <span className="metric-label">Total Jobs</span>
             <h3 className="metric-val">{totalRequests}</h3>
-            <span className="metric-meta">Build configurator entries</span>
+            <span className="metric-meta">Registered quote builder requests</span>
           </div>
         </div>
       </div>
@@ -139,9 +150,9 @@ export default function AdminDashboard({ user, onLogout }) {
       {/* Main Allocations Table */}
       <div className="admin-table-card glassmorphic-panel">
         <div className="card-header-row">
-          <h3>Active Allocation Requests</h3>
+          <h3>Active Print Queue</h3>
           <button onClick={fetchAllocations} disabled={loading} className="btn btn-secondary refresh-btn">
-            {loading ? <Loader2 size={14} className="spinner" /> : <RefreshCw size={14} />} Refresh Registry
+            {loading ? <Loader2 size={14} className="spinner" /> : <RefreshCw size={14} />} Refresh Queue
           </button>
         </div>
 
@@ -154,19 +165,19 @@ export default function AdminDashboard({ user, onLogout }) {
 
         {leadsList.length === 0 ? (
           <div className="empty-table-state">
-            <p>{loading ? 'Retrieving records...' : 'No allocations found in database. Lead form entries will show here.'}</p>
+            <p>{loading ? 'Retrieving records...' : 'No print jobs found in database. Quote builder entries will show here.'}</p>
           </div>
         ) : (
           <div className="table-responsive">
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Build ID</th>
+                  <th>Job ID</th>
                   <th>Client Profile</th>
                   <th>Contact info</th>
                   <th>City</th>
-                  <th>Configuration Spec</th>
-                  <th>Chassis Tier</th>
+                  <th>Print Specs</th>
+                  <th>Material Tier</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -174,12 +185,12 @@ export default function AdminDashboard({ user, onLogout }) {
               <tbody>
                 {leadsList.map((lead) => {
                   const isSold = lead.status === 'sold';
-                  const tierLabel = lead.tier === 'track' ? 'Track Edition' : lead.tier === 'bespoke' ? 'Bespoke Signature' : 'Chassis Standard';
-                  const tierPrice = lead.tier === 'track' ? '$320,000' : lead.tier === 'bespoke' ? '$450,000' : '$240,000';
+                  const tierLabel = lead.tier === 'track' ? 'Engineering SLA' : lead.tier === 'bespoke' ? 'Industrial SLS' : 'Rapid FDM';
+                  const tierPrice = lead.tier === 'track' ? '$199' : lead.tier === 'bespoke' ? 'Custom' : '$49';
 
                   return (
                     <tr key={lead.id} className="table-row">
-                      <td className="lead-id">#AETH-{String(lead.id).padStart(3, '0')}</td>
+                      <td className="lead-id">#ATH-{String(lead.id).padStart(3, '0')}</td>
                       <td className="lead-name">
                         <div className="profile-cell">
                           <strong>{lead.full_name}</strong>
@@ -196,7 +207,7 @@ export default function AdminDashboard({ user, onLogout }) {
                       </td>
                       <td>
                         <span className={`badge-status ${lead.status}`}>
-                          {isSold ? 'Sold' : 'Pending'}
+                          {isSold ? 'Completed' : 'Pending'}
                         </span>
                       </td>
                       <td>
@@ -208,9 +219,9 @@ export default function AdminDashboard({ user, onLogout }) {
                           {updatingId === lead.id ? (
                             <Loader2 size={12} className="spinner" />
                           ) : isSold ? (
-                            'Revert Pending'
+                            'Mark Pending'
                           ) : (
-                            'Confirm Sale'
+                            'Mark Completed'
                           )}
                         </button>
                       </td>
