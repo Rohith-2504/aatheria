@@ -222,6 +222,18 @@
   color: var(--color-text-muted);
 }
 
+.status-indicator.thinking {
+  background: var(--color-primary);
+  box-shadow: 0 0 0.5em var(--color-primary);
+  animation: pulse 1s infinite;
+}
+
+.connection-pulse.fast {
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0.5em var(--color-primary);
+  animation: travelDown 0.7s infinite linear;
+}
+
 /* Responsive Overrides */
 @media (max-width: 1024px) {
   .hero-section {
