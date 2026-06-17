@@ -5,6 +5,7 @@ import './Hero.css';
 export default function Hero({ onCtaClick }) {
   const [activeNode, setActiveNode] = useState(null);
   const [processingState, setProcessingState] = useState('idle');
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   const handleCTA = (e) => {
     e.preventDefault();
@@ -139,9 +140,9 @@ export default function Hero({ onCtaClick }) {
             <a href="#lead-form" onClick={handleCTA} className="btn btn-primary">
               Upload CAD & Quote <ArrowRight size="1.1em" />
             </a>
-            <a href="#features" onClick={handleSecondary} className="btn btn-secondary">
-              <Play size="1em" /> Explore Materials
-            </a>
+            <button onClick={() => setShowVideoModal(true)} className="btn btn-secondary">
+              <Play size="1em" /> Watch Demo
+            </button>
           </div>
         </div>
 
@@ -199,6 +200,23 @@ export default function Hero({ onCtaClick }) {
           </div>
         </div>
       </div>
+
+      {showVideoModal && (
+        <div className="video-modal-overlay" onClick={() => setShowVideoModal(false)}>
+          <div className="video-modal-content glassmorphic-panel" onClick={(e) => e.stopPropagation()}>
+            <button className="video-modal-close" onClick={() => setShowVideoModal(false)}>&times;</button>
+            <div className="video-player-wrapper">
+              <video 
+                src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-3d-printer-printing-a-prototype-41619-large.mp4" 
+                controls 
+                autoPlay 
+                loop
+                style={{ width: '100%', height: '100%', borderRadius: '12px', display: 'block', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
