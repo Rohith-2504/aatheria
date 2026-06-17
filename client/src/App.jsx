@@ -9,11 +9,35 @@ import Faq from './components/Faq';
 import LeadForm from './components/LeadForm';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
+import Auth from './components/Auth';
+import AdminDashboard from './components/AdminDashboard';
 
 export default function App() {
   const [highlightForm, setHighlightForm] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const [fadeLoader, setFadeLoader] = useState(false);
+
+  // Authentication and Routing States
+  const [user, setUser] = useState(null);
+  const [route, setRoute] = useState('auth'); // 'auth' | 'user-portal' | 'admin-dashboard'
+
+  useEffect(() => {
+    // Check local storage for active user session
+    const savedUser = localStorage.getItem('aetheria_user');
+    if (savedUser) {
+      try {
+        const parsed = JSON.parse(savedUser);
+        setUser(parsed);
+        if (parsed.role === 'admin') {
+          setRoute('admin-dashboard');
+        } else {
+          setRoute('user-portal');
+        }
+      } catch (err) {
+        console.error('Failed to parse saved session:', err);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     // Start fading out the preloader after 2.5s
@@ -40,21 +64,49 @@ export default function App() {
     }, 2000);
   };
 
+  const handleAuthSuccess = (authenticatedUser) => {
+    setUser(authenticatedUser);
+    localStorage.setItem('aetheria_user', JSON.stringify(authenticatedUser));
+    if (authenticatedUser.role === 'admin') {
+      setRoute('admin-dashboard');
+    } else {
+      setRoute('user-portal');
+    }
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem('aetheria_user');
+    setRoute('auth');
+  };
+
   return (
     <>
       {showLoader && <Preloader fade={fadeLoader} />}
       
       <div className={`app-layout-wrapper ${fadeLoader ? 'loaded' : ''}`}>
         <div className="app-layout">
-          <Navbar onCtaClick={triggerFormHighlight} />
-          <Hero onCtaClick={triggerFormHighlight} />
-          <Features />
-          <Benefits />
-          <Pricing />
-          <Testimonials />
-          <Faq />
-          <LeadForm isHighlighted={highlightForm} />
-          <Footer />
+          {route === 'auth' && (
+            <Auth onAuthSuccess={handleAuthSuccess} />
+          )}
+
+          {route === 'admin-dashboard' && (
+            <AdminDashboard user={user} onLogout={handleLogout} />
+          )}
+
+          {route === 'user-portal' && (
+            <>
+              <Navbar onCtaClick={triggerFormHighlight} user={user} onLogout={handleLogout} />
+              <Hero onCtaClick={triggerFormHighlight} />
+              <Features />
+              <Benefits />
+              <Pricing />
+              <Testimonials />
+              <Faq />
+              <LeadForm isHighlighted={highlightForm} user={user} />
+              <Footer />
+            </>
+          )}
         </div>
       </div>
     </>

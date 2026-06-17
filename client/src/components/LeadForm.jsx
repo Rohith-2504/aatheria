@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Database, AlertCircle, CheckCircle2, Loader2, Send, ChevronDown, ChevronUp } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Loader2, Send } from 'lucide-react';
 import './LeadForm.css';
 
-export default function LeadForm({ isHighlighted }) {
+export default function LeadForm({ isHighlighted, user }) {
   // Form fields state
   const [formData, setFormData] = useState({
     full_name: '',
     mobile_number: '',
     email: '',
     city: '',
-    message: ''
+    message: '',
+    tier: 'standard'
   });
 
   // Validation errors state
@@ -21,35 +22,21 @@ export default function LeadForm({ isHighlighted }) {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [serverError, setServerError] = useState('');
 
-  // Database inspector states
-  const [leadsList, setLeadsList] = useState([]);
-  const [showInspector, setShowInspector] = useState(false);
-  const [loadingLeads, setLoadingLeads] = useState(false);
-
-  // Fetch leads for the Database Inspector
-  const fetchLeads = async () => {
-    setLoadingLeads(true);
-    try {
-      const response = await fetch('/api/submissions');
-      const result = await response.json();
-      if (result.success) {
-        setLeadsList(result.data);
-      }
-    } catch (err) {
-      console.error('Error fetching submissions:', err);
-    } finally {
-      setLoadingLeads(false);
-    }
-  };
-
+  // Prefill details from authenticated user
   useEffect(() => {
-    fetchLeads();
-  }, []);
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        full_name: user.full_name || '',
+        email: user.username ? `${user.username}@hyper-gt.com` : ''
+      }));
+    }
+  }, [user]);
 
   // Validation helper
   const validateField = (name, value) => {
     let errorMsg = '';
-    const cleanValue = value.trim();
+    const cleanValue = String(value || '').trim();
 
     switch (name) {
       case 'full_name':
@@ -163,21 +150,19 @@ export default function LeadForm({ isHighlighted }) {
 
       if (response.ok && result.success) {
         setSubmitSuccess(true);
-        setFormData({
-          full_name: '',
+        setFormData(prev => ({
+          ...prev,
           mobile_number: '',
-          email: '',
           city: '',
-          message: ''
-        });
+          message: '',
+          tier: 'standard'
+        }));
         setErrors({});
         setTouched({});
-        fetchLeads(); // Refresh inspector list
         
-        // Trigger live WebGL 3D synapse firing sequence
+        // Trigger live WebGL 3D configurator animation pipeline in Hero.jsx
         window.dispatchEvent(new CustomEvent('lead-submitted'));
       } else {
-        // Capture server-side validation error mapping if returned
         if (result.errors) {
           setErrors(result.errors);
         }
@@ -190,7 +175,6 @@ export default function LeadForm({ isHighlighted }) {
     }
   };
 
-  // Reset success screen
   const handleResetForm = () => {
     setSubmitSuccess(false);
   };
@@ -301,6 +285,35 @@ export default function LeadForm({ isHighlighted }) {
                 </div>
               </div>
 
+              {/* Tier Selection Dropdown */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="tier">Configuration Spec Tier</label>
+                  <select
+                    id="tier"
+                    name="tier"
+                    value={formData.tier}
+                    onChange={handleChange}
+                    style={{
+                      width: '100%',
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      borderRadius: '10px',
+                      padding: '12px 14px',
+                      color: '#f1f5f9',
+                      fontSize: '0.95rem',
+                      outline: 'none',
+                      cursor: 'pointer',
+                      boxSizing: 'border-box'
+                    }}
+                  >
+                    <option value="standard" style={{ background: '#03000a' }}>Chassis Standard ($240,000)</option>
+                    <option value="track" style={{ background: '#03000a' }}>Track Edition ($320,000)</option>
+                    <option value="bespoke" style={{ background: '#03000a' }}>Bespoke Signature (Custom)</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="form-group">
                 <label htmlFor="message">Bespoke Specifications / Trim & Options</label>
                 <textarea
@@ -334,69 +347,6 @@ export default function LeadForm({ isHighlighted }) {
                 )}
               </button>
             </form>
-          )}
-        </div>
-
-        {/* Database Inspector (Extremely useful for Demo Video evaluation) */}
-        <div className="inspector-wrapper glassmorphic-panel">
-          <button 
-            className="inspector-toggle"
-            onClick={() => setShowInspector(!showInspector)}
-          >
-            <div className="inspector-toggle-title">
-              <Database size={18} className="database-icon" />
-              <span>Active Allocation Registry</span>
-              <span className="database-indicator online"></span>
-            </div>
-            {showInspector ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
-
-          {showInspector && (
-            <div className="inspector-content">
-              <div className="inspector-meta">
-                <p>Below is the live registry log of the SQLite table <code>submissions</code> inside <code>server/data/submissions.db</code>. Each entry represents a locked build slot.</p>
-                <button onClick={fetchLeads} disabled={loadingLeads} className="btn btn-secondary refresh-btn">
-                  {loadingLeads ? <Loader2 size={14} className="spinner" /> : 'Refresh Registry'}
-                </button>
-              </div>
-
-              {leadsList.length === 0 ? (
-                <div className="inspector-empty">
-                  <p>No reservations recorded. Submit the configuration form above to reserve your hypercar build slot.</p>
-                </div>
-              ) : (
-                <div className="table-responsive">
-                  <table className="inspector-table">
-                    <thead>
-                      <tr>
-                        <th>Build ID</th>
-                        <th>Full Name</th>
-                        <th>Email Address</th>
-                        <th>Contact Number</th>
-                        <th>City</th>
-                        <th>Bespoke Specifications</th>
-                        <th>Registration Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {leadsList.map((lead) => (
-                        <tr key={lead.id} className="table-row">
-                          <td className="lead-id">#AETH-{String(lead.id).padStart(3, '0')}</td>
-                          <td className="lead-name">{lead.full_name}</td>
-                          <td className="lead-email">{lead.email}</td>
-                          <td>{lead.mobile_number}</td>
-                          <td>{lead.city}</td>
-                          <td className="lead-message" title={lead.message}>{lead.message}</td>
-                          <td className="lead-date">
-                            {new Date(lead.created_at).toLocaleString()}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
           )}
         </div>
       </div>

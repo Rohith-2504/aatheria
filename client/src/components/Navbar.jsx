@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Car } from 'lucide-react';
 import './Navbar.css';
 
-export default function Navbar({ onCtaClick }) {
+export default function Navbar({ onCtaClick, user, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -63,6 +63,14 @@ export default function Navbar({ onCtaClick }) {
           >
             Reserve Now
           </a>
+          {user && (
+            <div className="nav-user-section">
+              <span className="nav-username">Hi, {user.full_name || user.username}</span>
+              <button onClick={onLogout} className="btn-nav-logout">
+                Logout
+              </button>
+            </div>
+          )}
         </div>
 
         <button className="nav-hamburger" onClick={toggleMenu} aria-label="Toggle navigation">

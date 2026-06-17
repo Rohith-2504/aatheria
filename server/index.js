@@ -25,9 +25,62 @@ function isValidMobile(mobile) {
   return phoneRegex.test(mobile) && digitsOnly.length >= 7 && digitsOnly.length <= 15;
 }
 
-// API Route: Submit lead capture form
+// API Route: Auth Signup
+app.post('/api/auth/signup', (req, res) => {
+  const { username, password, full_name, role } = req.body;
+  if (!username || !password || !full_name) {
+    return res.status(400).json({ success: false, message: 'All fields are required.' });
+  }
+  const cleanUsername = username.trim().toLowerCase();
+  const cleanFullName = full_name.trim();
+  const selectedRole = role === 'admin' ? 'admin' : 'user';
+
+  try {
+    const existing = db.prepare('SELECT id FROM users WHERE username = ?').get(cleanUsername);
+    if (existing) {
+      return res.status(400).json({ success: false, message: 'Username is already taken.' });
+    }
+    const stmt = db.prepare('INSERT INTO users (username, password, full_name, role) VALUES (?, ?, ?, ?)');
+    stmt.run(cleanUsername, password, cleanFullName, selectedRole);
+
+    return res.status(201).json({
+      success: true,
+      message: 'Signup successful!',
+      user: { username: cleanUsername, full_name: cleanFullName, role: selectedRole }
+    });
+  } catch (err) {
+    console.error('Signup error:', err);
+    return res.status(500).json({ success: false, message: 'Server error during signup.' });
+  }
+});
+
+// API Route: Auth Signin
+app.post('/api/auth/signin', (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ success: false, message: 'Username and password are required.' });
+  }
+  const cleanUsername = username.trim().toLowerCase();
+
+  try {
+    const user = db.prepare('SELECT * FROM users WHERE username = ?').get(cleanUsername);
+    if (!user || user.password !== password) {
+      return res.status(400).json({ success: false, message: 'Invalid username or password.' });
+    }
+    return res.json({
+      success: true,
+      message: 'Logged in successfully!',
+      user: { username: user.username, full_name: user.full_name, role: user.role }
+    });
+  } catch (err) {
+    console.error('Signin error:', err);
+    return res.status(500).json({ success: false, message: 'Server error during signin.' });
+  }
+});
+
+// API Route: Submit hypercar reservation allocation
 app.post('/api/submissions', (req, res) => {
-  const { full_name, mobile_number, email, city, message } = req.body;
+  const { full_name, mobile_number, email, city, message, tier } = req.body;
   
   const errors = {};
 
@@ -37,6 +90,7 @@ app.post('/api/submissions', (req, res) => {
   const cleanEmail = (email || '').trim();
   const cleanCity = (city || '').trim();
   const cleanMessage = (message || '').trim();
+  const cleanTier = (tier || 'standard').trim().toLowerCase();
 
   // Server-side validation
   if (!cleanName) {
@@ -66,9 +120,13 @@ app.post('/api/submissions', (req, res) => {
   }
 
   if (!cleanMessage) {
-    errors.message = 'Message is required.';
+    errors.message = 'Bespoke specifications are required.';
   } else if (cleanMessage.length < 10 || cleanMessage.length > 1000) {
-    errors.message = 'Message must be between 10 and 1000 characters.';
+    errors.message = 'Bespoke specifications must be between 10 and 1000 characters.';
+  }
+
+  if (!['standard', 'track', 'bespoke'].includes(cleanTier)) {
+    errors.tier = 'Invalid allocation configuration spec selected.';
   }
 
   // If there are validation errors, return them
@@ -83,15 +141,15 @@ app.post('/api/submissions', (req, res) => {
   try {
     // Insert into database
     const stmt = db.prepare(`
-      INSERT INTO submissions (full_name, mobile_number, email, city, message)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO submissions (full_name, mobile_number, email, city, message, tier, status)
+      VALUES (?, ?, ?, ?, ?, ?, 'pending')
     `);
     
-    const result = stmt.run(cleanName, cleanMobile, cleanEmail, cleanCity, cleanMessage);
+    const result = stmt.run(cleanName, cleanMobile, cleanEmail, cleanCity, cleanMessage, cleanTier);
     
     return res.status(201).json({
       success: true,
-      message: 'Thank you! Your lead request has been captured successfully.',
+      message: 'Thank you! Your allocation request has been captured successfully.',
       submissionId: result.lastInsertRowid
     });
   } catch (err) {
@@ -103,7 +161,7 @@ app.post('/api/submissions', (req, res) => {
   }
 });
 
-// API Route: Get all submissions (for admin validation and walkthrough)
+// API Route: Get all submissions (for admin registry inspection)
 app.get('/api/submissions', (req, res) => {
   try {
     const submissions = db.prepare('SELECT * FROM submissions ORDER BY created_at DESC').all();
@@ -117,6 +175,26 @@ app.get('/api/submissions', (req, res) => {
       success: false,
       message: 'Failed to retrieve submissions.'
     });
+  }
+});
+
+// API Route: Update reservation status (Admins only)
+app.put('/api/submissions/:id/status', (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  if (!['pending', 'sold'].includes(status)) {
+    return res.status(400).json({ success: false, message: 'Invalid status value.' });
+  }
+  try {
+    const stmt = db.prepare('UPDATE submissions SET status = ? WHERE id = ?');
+    const result = stmt.run(status, id);
+    if (result.changes === 0) {
+      return res.status(404).json({ success: false, message: 'Submission not found.' });
+    }
+    return res.json({ success: true, message: 'Status updated successfully.' });
+  } catch (err) {
+    console.error('Status update error:', err);
+    return res.status(500).json({ success: false, message: 'Server error updating status.' });
   }
 });
 

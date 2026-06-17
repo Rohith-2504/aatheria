@@ -24,6 +24,36 @@ db.exec(`
   )
 `);
 
+// Create users table if it doesn't exist
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'user',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+
+// Dynamically migrate submissions table to include tier and status columns
+try {
+  const tableInfo = db.prepare("PRAGMA table_info(submissions)").all();
+  const hasTier = tableInfo.some(col => col.name === 'tier');
+  const hasStatus = tableInfo.some(col => col.name === 'status');
+
+  if (!hasTier) {
+    db.exec("ALTER TABLE submissions ADD COLUMN tier TEXT NOT NULL DEFAULT 'standard'");
+    console.log('Migrated submissions table: Added tier column.');
+  }
+  if (!hasStatus) {
+    db.exec("ALTER TABLE submissions ADD COLUMN status TEXT NOT NULL DEFAULT 'pending'");
+    console.log('Migrated submissions table: Added status column.');
+  }
+} catch (err) {
+  console.error('Migration error for submissions table:', err);
+}
+
 console.log('Database initialized successfully at:', dbPath);
 
 module.exports = db;

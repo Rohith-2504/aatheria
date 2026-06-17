@@ -129,3 +129,49 @@
     max-width: 300px;
   }
 }
+
+.nav-user-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 20px;
+}
+
+.nav-username {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+.btn-nav-logout {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-nav-logout:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .nav-user-section {
+    flex-direction: column;
+    border-left: none;
+    padding-left: 0;
+    margin-top: 10px;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+  }
+}
