@@ -1,33 +1,9 @@
-import React, { useState } from 'react';
-import { Check, Code, Zap, ShieldAlert, Printer } from 'lucide-react';
+import React from 'react';
+import { Check } from 'lucide-react';
 import './Benefits.css';
+import printerImage from './aatheria_printer.png';
 
 export default function Benefits() {
-  const [activeTab, setActiveTab] = useState('aether');
-
-  const legacyCode = `; 🚫 Legacy Manual G-Code Coordinates
-G21 ; Set units to millimeters
-G90 ; Absolute positioning
-M104 S200 ; Set extruder temp
-G28 X0 Y0 Z0 ; Home all axes
-G1 F1200 X45.2 Y78.4 Z0.2 E0.035 ; Brittle manual extrusion
-G1 F1500 X47.8 Y80.2 Z0.2 E0.078 ; Hardcoded toolpath`;
-
-  const aetherCode = `//  Aatheria Dynamic Print Profile
-const printJob = {
-  jobId: "AATH-PRNT-830-2026",
-  materials: {
-    primary: "PEEK-Carbon",
-    supports: "PVA-Soluble"
-  },
-  slicerParameters: {
-    layerHeight: 0.02,   // mm (20 microns)
-    infillDensity: 0.40, // 40% Gyroid infill
-    chamberTemp: 80      // °C active control
-  },
-  queueStatus: "JOB_LOCKED"
-};`;
-
   return (
     <section id="benefits" className="benefits-section section">
       <div className="container benefits-grid">
@@ -72,28 +48,19 @@ const printJob = {
         </div>
 
         <div className="benefits-visual">
-          <div className="code-card glassmorphic-panel">
-            <div className="code-card-tabs">
-              <button 
-                className={`code-tab-btn legacy ${activeTab === 'legacy' ? 'active' : ''}`}
-                onClick={() => setActiveTab('legacy')}
-              >
-                <ShieldAlert size={14} /> Legacy Analog
-              </button>
-              <button 
-                className={`code-tab-btn aether ${activeTab === 'aether' ? 'active' : ''}`}
-                onClick={() => setActiveTab('aether')}
-              >
-                <Printer size={14} /> Aatheria Software
-              </button>
-            </div>
-            <div className="code-body">
-              <pre>
-                <code>
-                  {activeTab === 'legacy' ? legacyCode : aetherCode}
-                </code>
-              </pre>
-            </div>
+          <div className="benefits-image-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img 
+              src={printerImage} 
+              alt="Aatheria Industrial SLS Printer" 
+              style={{
+                width: '100%',
+                maxWidth: '520px',
+                borderRadius: '16px',
+                border: '1px solid rgba(124, 58, 237, 0.25)',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.55), 0 0 30px rgba(124, 58, 237, 0.12)',
+                display: 'block'
+              }} 
+            />
           </div>
         </div>
       </div>

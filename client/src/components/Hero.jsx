@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play, Database, Printer, Zap, FileCode } from 'lucide-react';
 import './Hero.css';
-import printerImage from './aatheria_printer.png';
 
 export default function Hero({ onCtaClick }) {
   const [activeNode, setActiveNode] = useState(null);
@@ -143,20 +142,6 @@ export default function Hero({ onCtaClick }) {
             <a href="#features" onClick={handleSecondary} className="btn btn-secondary">
               <Play size="1em" /> Explore Materials
             </a>
-          </div>
-          <div className="hero-car-preview" style={{ marginTop: '2.5rem' }}>
-            <img 
-              src={printerImage} 
-              alt="Aatheria Industrial SLS Printer" 
-              style={{
-                width: '100%',
-                maxWidth: '480px',
-                borderRadius: '14px',
-                border: '1px solid rgba(124, 58, 237, 0.25)',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(124, 58, 237, 0.1)',
-                display: 'block'
-              }} 
-            />
           </div>
         </div>
 
