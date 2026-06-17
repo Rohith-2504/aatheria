@@ -13,8 +13,14 @@ export default function Workflow3D() {
 
   // React state for HUD dashboard
   const [activeNode, setActiveNode] = useState(null);
+  const activeNodeRef = useRef(null);
   const [cognitiveState, setCognitiveState] = useState('RESTING POTENTIAL');
   const [scanMode, setScanMode] = useState(false);
+
+  const updateActiveNode = (id) => {
+    setActiveNode(id);
+    activeNodeRef.current = id;
+  };
 
   // Shared bridge ref between React button callbacks and Three.js loop
   const controlsRef = useRef({
@@ -100,6 +106,10 @@ export default function Workflow3D() {
 
     let width = container.clientWidth;
     let height = container.clientHeight || 520;
+
+    // Initialize raycasting vectors immediately to prevent race condition reference errors
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
 
     // --- 1. Scene Setup ---
     const scene = new THREE.Scene();
@@ -636,9 +646,9 @@ export default function Workflow3D() {
         }
 
         if (foundIntersect && foundIntersect.userData.isPrimary) {
-          setActiveNode(foundIntersect.userData.id);
+          updateActiveNode(foundIntersect.userData.id);
         } else {
-          setActiveNode(null);
+          updateActiveNode(null);
         }
       } else {
         // Drag rotation logic
@@ -698,8 +708,7 @@ export default function Workflow3D() {
     container.addEventListener('touchend', onTouchEnd);
     container.addEventListener('wheel', onWheel, { passive: false });
 
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
+
 
     // --- 12. Animation Loop & HTML projection ---
     const tempV = new THREE.Vector3();
@@ -813,7 +822,7 @@ export default function Workflow3D() {
       nodeObjects.forEach((group, index) => {
         const isPrimary = group.userData.isPrimary;
         if (isPrimary) {
-          const isHovered = activeNode === group.userData.id;
+          const isHovered = activeNodeRef.current === group.userData.id;
           const targetScale = isHovered ? 1.35 : 1.0;
           
           group.scale.x += (targetScale - group.scale.x) * 0.1;
