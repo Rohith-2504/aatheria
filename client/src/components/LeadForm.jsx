@@ -91,11 +91,11 @@ export default function LeadForm({ isHighlighted }) {
         break;
       case 'message':
         if (!cleanValue) {
-          errorMsg = 'Message is required.';
+          errorMsg = 'Bespoke specifications are required.';
         } else if (cleanValue.length < 10) {
-          errorMsg = 'Message must be at least 10 characters.';
+          errorMsg = 'Bespoke specifications must be at least 10 characters.';
         } else if (cleanValue.length > 1000) {
-          errorMsg = 'Message must be under 1000 characters.';
+          errorMsg = 'Bespoke specifications must be under 1000 characters.';
         }
         break;
       default:
@@ -199,25 +199,25 @@ export default function LeadForm({ isHighlighted }) {
     <section id="lead-form" className="lead-section section">
       <div className="container lead-container">
         <div className="section-header">
-          <span className="tagline">Lead Capture</span>
-          <h2>Secure Your Sandbox Access</h2>
-          <p>Complete the registration form to instantiate a personal workspace node and store your schema in the SQLite database.</p>
+          <span className="tagline">Secure Allocation</span>
+          <h2>Aetheria GT Allocation Builder</h2>
+          <p>Complete your commission profile to register your bespoke build slot. All details are securely logged to the active chassis registry.</p>
         </div>
 
         <div className={`lead-card-wrapper glassmorphic-panel ${isHighlighted ? 'highlighted' : ''}`}>
           {submitSuccess ? (
             <div className="success-screen">
               <CheckCircle2 className="success-icon" size={64} />
-              <h3>Submission Successful!</h3>
+              <h3>Allocation Profile Registered!</h3>
               <p className="success-message">
-                Your registration was validated and written to the SQLite core database successfully.
+                Your bespoke configuration was successfully validated and committed to the Aetheria Registry.
               </p>
               <div className="success-details">
-                <p><strong>Database Target:</strong> server/data/submissions.db</p>
-                <p><strong>Table Name:</strong> submissions</p>
+                <p><strong>Registry Database:</strong> server/data/submissions.db</p>
+                <p><strong>Registry Table:</strong> submissions</p>
               </div>
               <button onClick={handleResetForm} className="btn btn-primary">
-                Submit Another Request
+                Configure Another Build
               </button>
             </div>
           ) : (
@@ -302,7 +302,7 @@ export default function LeadForm({ isHighlighted }) {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message">Bespoke Specifications / Trim & Options</label>
                 <textarea
                   id="message"
                   name="message"
@@ -310,7 +310,7 @@ export default function LeadForm({ isHighlighted }) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   rows={4}
-                  placeholder="Describe your workflow automation goals (minimum 10 characters)..."
+                  placeholder="Describe your bespoke options (e.g. Paint finish, Interior Alcantara color, Track package details - minimum 10 characters)..."
                   className={touched.message && errors.message ? 'invalid' : ''}
                 ></textarea>
                 {touched.message && errors.message && (
@@ -325,11 +325,11 @@ export default function LeadForm({ isHighlighted }) {
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 size={18} className="spinner" /> Validating and Storing...
+                    <Loader2 size={18} className="spinner" /> Registering Allocation...
                   </>
                 ) : (
                   <>
-                    <Send size={18} /> Send Access Request
+                    <Send size={18} /> Reserve Your Hypercar
                   </>
                 )}
               </button>
@@ -345,7 +345,7 @@ export default function LeadForm({ isHighlighted }) {
           >
             <div className="inspector-toggle-title">
               <Database size={18} className="database-icon" />
-              <span>SQLite Live Inspector</span>
+              <span>Active Allocation Registry</span>
               <span className="database-indicator online"></span>
             </div>
             {showInspector ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -354,34 +354,34 @@ export default function LeadForm({ isHighlighted }) {
           {showInspector && (
             <div className="inspector-content">
               <div className="inspector-meta">
-                <p>Below is the real-time content of the SQLite table <code>submissions</code> inside <code>server/data/submissions.db</code>.</p>
+                <p>Below is the live registry log of the SQLite table <code>submissions</code> inside <code>server/data/submissions.db</code>. Each entry represents a locked build slot.</p>
                 <button onClick={fetchLeads} disabled={loadingLeads} className="btn btn-secondary refresh-btn">
-                  {loadingLeads ? <Loader2 size={14} className="spinner" /> : 'Refresh Data'}
+                  {loadingLeads ? <Loader2 size={14} className="spinner" /> : 'Refresh Registry'}
                 </button>
               </div>
 
               {leadsList.length === 0 ? (
                 <div className="inspector-empty">
-                  <p>No records found in database. Submit the form above to insert a new row.</p>
+                  <p>No reservations recorded. Submit the configuration form above to reserve your hypercar build slot.</p>
                 </div>
               ) : (
                 <div className="table-responsive">
                   <table className="inspector-table">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        <th>Build ID</th>
                         <th>Full Name</th>
                         <th>Email Address</th>
-                        <th>Mobile Number</th>
+                        <th>Contact Number</th>
                         <th>City</th>
-                        <th>Message</th>
-                        <th>Date Submitted</th>
+                        <th>Bespoke Specifications</th>
+                        <th>Registration Date</th>
                       </tr>
                     </thead>
                     <tbody>
                       {leadsList.map((lead) => (
                         <tr key={lead.id} className="table-row">
-                          <td className="lead-id">#{lead.id}</td>
+                          <td className="lead-id">#AETH-{String(lead.id).padStart(3, '0')}</td>
                           <td className="lead-name">{lead.full_name}</td>
                           <td className="lead-email">{lead.email}</td>
                           <td>{lead.mobile_number}</td>

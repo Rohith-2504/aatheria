@@ -7,24 +7,24 @@ export default function Faq() {
 
   const faqs = [
     {
-      q: 'How does the SQLite database handle concurrent requests?',
-      a: 'AetherFlow utilizes better-sqlite3 in synchronous mode. Because Node.js runs Express in a single-threaded event loop, SQL transactions execute in a rapid sequential stack. This prevents file locking conflicts and achieves high throughput.'
+      q: 'How does the digital allocation registry secure my reservation?',
+      a: 'When you submit your configuration build, a secure registry token is generated and bound to your details in our database ledger. This reserves a physical chassis and VIN slot on our assembly line in chronological order of submission.'
     },
     {
-      q: 'What kind of validations are executed on form submission?',
-      a: 'We implement double-layer validation. First, the React frontend checks format patterns (such as standard emails and 7-to-15 digit phone numbers) in real-time. Second, the Express API re-validates and sanitizes all inputs to ensure bad requests or script injections are blocked before reaching SQLite.'
+      q: 'What details can I customize in my bespoke GT commission?',
+      a: 'Aetheria offers a complete styling configurator. You can request bespoke paint options (such as liquid carbon tints), specific interior cabin materials (such as hand-stitched Alcantara), steering wheel ergonomics, and track-suspension tuning characteristics.'
     },
     {
-      q: 'Can I extract or view the data stored in the database?',
-      a: 'Yes. The database is saved locally as submissions.db under server/data/. You can query this file using any SQL viewer like DB Browser for SQLite, or fetch all leads using the secure, built-in admin table at the bottom of our web portal.'
+      q: 'How can I view and monitor my active allocation status?',
+      a: 'Once registered, your submission status is logged live in the Active Allocation Registry at the bottom of this page. As manufacturing steps begin (from chassis alignment to paint applications), you can track progress directly.'
     },
     {
-      q: 'Is this architecture compatible with cloud databases like PostgreSQL?',
-      a: 'Absolutely. The SQL queries use standard, compliant syntax. You can easily swap better-sqlite3 for pg or mysql2 in server/db.js without rewriting any of the frontend UI or validation schemas.'
+      q: 'Is the deposit fully refundable if my plans change?',
+      a: 'Yes. Standard and Track Edition allocation deposits are 100% refundable up until the physical chassis registry takes place (typically 14 days post-validation). Bespoke Signature commissions require a non-refundable custom panel deposit once engineering blueprints are signed.'
     },
     {
-      q: 'How is this monorepo prepared for single-host deployment?',
-      a: 'We compile the React app into client/dist/ and instruct our Express backend to serve it as static files. This packages the frontend client and backend API into a single, unified Node.js service that runs on Render, Railway, or a VPS.'
+      q: 'What charging standards does Aetheria support?',
+      a: 'Our quantum-battery energy cells utilize a dual-voltage high-capacity battery pack compatible with both NACS (Tesla Supercharger network) and CCS high-speed charging protocols, allowing for a 10% to 80% charge in just 15 minutes.'
     }
   ];
 
@@ -38,7 +38,7 @@ export default function Faq() {
         <div className="section-header">
           <span className="tagline">Got Questions?</span>
           <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know about the stack, validation rules, database integrity, and production hosting.</p>
+          <p>Everything you need to know about the allocation process, design customizations, active vehicle support, and battery charging.</p>
         </div>
 
         <div className="faq-list">

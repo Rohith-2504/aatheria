@@ -8,11 +8,11 @@ try {
   `);
   
   const result = insert.run(
-    'Test User',
-    '+1234567890',
-    'test@aetherflow.com',
-    'San Francisco',
-    'Hello, this is a test message to verify SQLite storage.'
+     'Test User',
+     '+1234567890',
+     'client@hyper-gt.com',
+     'San Francisco',
+     'Liquid Carbon-Purple weave finish with Track Edition aerodynamic package.'
   );
   
   console.log('Insert Result:', result);

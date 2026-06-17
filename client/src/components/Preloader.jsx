@@ -6,15 +6,14 @@ export default function Preloader({ fade }) {
   const [progress, setProgress] = useState(0);
 
   const logs = [
-    'INITIATING ORCHESTRATION SYSTEM...',
-    'LOADING SCHEMAS & DICTIONARIES...',
-    'ESTABLISHING COGNITIVE SYNAPSE PIPELINES...',
-    'INTEGRATING SQLITE CORE DATABASE...',
-    'SYSTEM ONLINE. CORE OPERATIONAL.'
+    'INITIALIZING HYPER-GT POWERGRID...',
+    'CALIBRATING TRI-MOTOR SYSTEM CHECKS...',
+    'SYNCHRONIZING ACTIVE DIFFERENTIAL VECTORING...',
+    'INGESTING DRIVER CALIBRATIONS & SUSPENSION GEOMETRY...',
+    'AETHERIA SYSTEM ONLINE. DRIVE READY.'
   ];
 
   useEffect(() => {
-    // Increment logs step-by-step over the loading sequence
     const logIntervals = [
       setTimeout(() => setLogIndex(1), 500),
       setTimeout(() => setLogIndex(2), 1000),
@@ -22,7 +21,6 @@ export default function Preloader({ fade }) {
       setTimeout(() => setLogIndex(4), 2100),
     ];
 
-    // Increment progress bar smoothly from 0 to 100% over 2.5 seconds
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -41,15 +39,11 @@ export default function Preloader({ fade }) {
 
   return (
     <div className={`preloader-overlay ${fade ? 'fade-out' : ''}`}>
-      {/* Background matrix pattern */}
       <div className="preloader-matrix-overlay" />
-      
-      {/* Volumetric glow backdrops */}
       <div className="preloader-glow preloader-glow-purple" />
       <div className="preloader-glow preloader-glow-cyan" />
 
       <div className="preloader-content">
-        {/* Stylized self-drawing isometric layered logo */}
         <div className="preloader-logo-wrapper">
           <svg className="preloader-logo" viewBox="0 0 100 100" width="100" height="100">
             <path className="layer-path layer-3" d="M50,15 L85,32.5 L50,50 L15,32.5 Z" fill="none" stroke="url(#preloader-logo-grad)" strokeWidth="2.5" />
@@ -64,19 +58,16 @@ export default function Preloader({ fade }) {
           </svg>
         </div>
 
-        {/* Brand Name with glow */}
         <h1 className="preloader-title">
-          <span>Aether</span><span className="text-gradient">Flow</span>
+          <span>AETHERIA</span>
         </h1>
         
-        <p className="preloader-subtitle text-gradient">AI WORKFLOW ORCHESTRATION</p>
+        <p className="preloader-subtitle text-gradient">ALL-ELECTRIC VELOCITY</p>
 
-        {/* Progress bar container */}
         <div className="preloader-progress-container">
           <div className="preloader-progress-bar" style={{ width: `${progress}%` }} />
         </div>
 
-        {/* Live system boot logs terminal */}
         <div className="preloader-terminal">
           <div className="terminal-cursor" />
           <span className="terminal-text">&gt; {logs[logIndex]}</span>

@@ -5,27 +5,27 @@ import './Testimonials.css';
 export default function Testimonials() {
   const reviews = [
     {
-      name: 'Sarah Jenkins',
-      role: 'Lead Architect at CloudScale',
-      text: 'AetherFlow completely simplified how we capture and sanitize lead streams. Setting up Express validation took minutes, and SQLite database writes are consistently sub-40ms.',
+      name: 'Marcus Vance',
+      role: 'Chief Editor at Apex Magazine',
+      text: 'The Aetheria Hyper-GT is an absolute paradigm shift. Launching this tri-motor beast out of a corner feels like breaking the laws of physics. The torque vectoring reacts faster than human synapses.',
       stars: 5,
-      initials: 'SJ',
+      initials: 'MV',
       gradient: 'linear-gradient(135deg, #7c3aed, #06b6d4)'
     },
     {
-      name: 'Michael Chen',
-      role: 'Founder of DevLaunch',
-      text: "Running SQLite via better-sqlite3 with AetherFlow's isolated transactions has resolved our lead ingestion database bottlenecks. It handles high traffic without a hiccup.",
+      name: 'Clara Dubois',
+      role: 'Pro Racing Driver & Development Pilot',
+      text: 'We pushed the Track Edition at Nürburgring. The active ground-effects and AI suspension keeping 1,900 HP glued to the tarmac is a masterclass in dynamic engineering. Truly breathtaking.',
       stars: 5,
-      initials: 'MC',
+      initials: 'CD',
       gradient: 'linear-gradient(135deg, #06b6d4, #3b82f6)'
     },
     {
-      name: 'Elena Rostova',
-      role: 'Growth Director at SaaSify',
-      text: 'The double-layer email and phone validation blocked all bot signups overnight. Plus, our growth team can check live entries straight from the ingestion panel.',
+      name: 'Viktor Sterling',
+      role: 'Bespoke Collector & Client',
+      text: 'The allocation and design process was completely seamless. Ordering my one-of-one Liquid Carbon commission was done directly through their secure registry, and the delivery was pristine.',
       stars: 5,
-      initials: 'ER',
+      initials: 'VS',
       gradient: 'linear-gradient(135deg, #ec4899, #7c3aed)'
     }
   ];
@@ -34,9 +34,9 @@ export default function Testimonials() {
     <section id="testimonials" className="testimonials-section section">
       <div className="container">
         <div className="section-header">
-          <span className="tagline">Success Stories</span>
-          <h2>Loved by Developers & Marketers</h2>
-          <p>Read how fast-growing startups leverage AetherFlow to secure and streamline their data ingestion pipelines.</p>
+          <span className="tagline">Test Pilots</span>
+          <h2>What the Experts Say</h2>
+          <p>Read performance reports and initial driving impressions from top automotive publications and test pilots.</p>
         </div>
 
         <div className="testimonials-grid">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Play, Database, MessageSquare, Zap, Cpu } from 'lucide-react';
+import { ArrowRight, Play, Database, Car, Zap, Paintbrush } from 'lucide-react';
 import './Hero.css';
 
 export default function Hero({ onCtaClick }) {
@@ -43,20 +43,20 @@ export default function Hero({ onCtaClick }) {
   // Listen to form submission events to trigger the interactive processing sequence
   useEffect(() => {
     const handleFormSubmit = () => {
-      // Step 1: Lead Captured
+      // Step 1: Spec Selected
       setProcessingState('captured');
 
-      // Step 2: AI Classifier (starts after 1.2s)
+      // Step 2: Custom Paint (starts after 1.2s)
       setTimeout(() => {
         setProcessingState('classifying');
       }, 1200);
 
-      // Step 3: SQLite Storage (starts after 2.4s)
+      // Step 3: Chassis Registered (starts after 2.4s)
       setTimeout(() => {
         setProcessingState('storing');
       }, 2400);
 
-      // Step 4: Auto-Response (starts after 3.6s)
+      // Step 4: Delivery Dispatched (starts after 3.6s)
       setTimeout(() => {
         setProcessingState('responding');
       }, 3600);
@@ -76,33 +76,33 @@ export default function Hero({ onCtaClick }) {
   const nodes = [
     {
       id: 1,
-      title: 'Lead Captured',
-      icon: <MessageSquare size="1.2em" />,
-      desc: processingState === 'captured' ? 'Lead captured via /api/submissions' : 'Form submission received',
+      title: 'Spec Selected',
+      icon: <Car size="1.2em" />,
+      desc: processingState === 'captured' ? 'Specification initialized via direct build' : 'Powertrain & package selected',
       color: '#06b6d4',
       isActiveState: processingState === 'captured'
     },
     {
       id: 2,
-      title: 'AI Classifier',
-      icon: <Cpu size="1.2em" />,
-      desc: processingState === 'classifying' ? "Urgency: High - Tagged: 'Growth Lead'" : 'Checks sentiment & intent',
+      title: 'Bespoke Paint',
+      icon: <Paintbrush size="1.2em" />,
+      desc: processingState === 'classifying' ? "Finish: Liquid Carbon-Purple weave" : 'Custom trim & aero panels selected',
       color: '#7c3aed',
       isActiveState: processingState === 'classifying'
     },
     {
       id: 3,
-      title: 'SQLite Database',
+      title: 'Chassis Registered',
       icon: <Database size="1.2em" />,
-      desc: processingState === 'storing' ? 'Row inserted in submissions.db successfully' : 'Saves lead details securely',
+      desc: processingState === 'storing' ? 'Allocation committed to security ledger' : 'Secure allocation registry log',
       color: '#10b981',
       isActiveState: processingState === 'storing'
     },
     {
       id: 4,
-      title: 'Auto-Response',
+      title: 'Booking Confirmed',
       icon: <Zap size="1.2em" />,
-      desc: processingState === 'responding' ? 'Slack alert dispatched in 40ms' : 'Dispatches instant alert',
+      desc: processingState === 'responding' ? 'Bespoke build slot confirmed' : 'Instant allocation confirmation',
       color: '#f59e0b',
       isActiveState: processingState === 'responding'
     }
@@ -112,15 +112,15 @@ export default function Hero({ onCtaClick }) {
   const getStatusText = () => {
     switch (processingState) {
       case 'captured':
-        return 'Submission detected, orchestrating flow...';
+        return 'Specification initialized, compiling config...';
       case 'classifying':
-        return 'Running AI classification sequence...';
+        return 'Applying bespoke visual trims & aerodynamics...';
       case 'storing':
-        return 'SQLite write transaction committed...';
+        return 'Registering vehicle VIN and chassis slot...';
       case 'responding':
-        return 'Slack webhook response executed successfully.';
+        return 'Logistics locked. Order confirmation dispatched.';
       default:
-        return 'Workflow Listening on /api/submissions';
+        return 'Configurator Online / Direct Allocation';
     }
   };
 
@@ -128,19 +128,19 @@ export default function Hero({ onCtaClick }) {
     <section id="hero" className="hero-section section animate-fadeIn">
       <div className="container hero-grid">
         <div className="hero-content">
-          <span className="tagline">Introducing AetherFlow 2.0</span>
+          <span className="tagline">The Future of Velocity</span>
           <h1 className="hero-title">
-            Orchestrate Your Workflows with <span className="text-gradient">AI Intellect</span>
+            Bespoke Engineering. <span className="text-gradient">Pure Power.</span>
           </h1>
           <p className="hero-desc">
-            AetherFlow bridges the gap between raw data streams and automated SaaS execution. Capture leads, classify insights, and write data directly to your SQLite core database in real-time.
+            Aetheria Hyper-GT combines carbon-fiber monocoque aerodynamics with a 1,900 HP tri-motor electric powertrain. Custom built to your specifications, registered securely, and delivered globally.
           </p>
           <div className="hero-actions">
             <a href="#lead-form" onClick={handleCTA} className="btn btn-primary">
-              Build a Flow <ArrowRight size="1.1em" />
+              Build Your Spec <ArrowRight size="1.1em" />
             </a>
             <a href="#features" onClick={handleSecondary} className="btn btn-secondary">
-              <Play size="1em" /> Explore Features
+              <Play size="1em" /> Explore Specs
             </a>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function Hero({ onCtaClick }) {
                 <span className="dot dot-yellow"></span>
                 <span className="dot dot-green"></span>
               </div>
-              <span className="window-title">AetherFlow Builder — lead_ingestion.flow</span>
+              <span className="window-title">Aetheria Configurator — build_pipeline.spec</span>
             </div>
 
             <div className="flow-nodes">

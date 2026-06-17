@@ -5,49 +5,50 @@ import './Pricing.css';
 export default function Pricing() {
   const tiers = [
     {
-      name: 'Developer',
-      price: '$0',
-      period: 'forever',
-      desc: 'Perfect for local development and personal staging environments.',
+      name: 'Chassis Standard',
+      price: '$240,000',
+      period: 'base allocation',
+      desc: 'High-performance all-electric hyper-GT base build with standard specifications.',
       features: [
-        '1 Local SQLite Database',
-        'Up to 100 Lead Submissions/mo',
-        'Standard Client Validation',
-        'Community Forum Access'
+        'Tri-Motor 1,200 HP Powertrain',
+        'Liquid-cooled lithium cell core (350-mi)',
+        'Standard carbon aerodynamics',
+        'Factory paint palette options',
+        'Secure digital VIN registry reservation'
       ],
-      cta: 'Start Building',
+      cta: 'Reserve Standard Spec',
       popular: false
     },
     {
-      name: 'Growth',
-      price: '$49',
-      period: 'per month',
-      desc: 'Designed for production websites requiring secure validation & automated AI.',
+      name: 'Track Edition',
+      price: '$320,000',
+      period: 'performance spec',
+      desc: 'Track-ready performance package with active aerodynamics and suspension.',
       features: [
-        'Unlimited SQLite Instances',
-        'Up to 5,000 Submissions/mo',
-        'Double-Layer Regex Validation',
-        'AI Intent & Sentiment Classifier',
-        'Slack & Email Auto-Alerts',
-        'Priority Email Support (12h SLA)'
+        'Full 1,900 HP upgrade (torque vectoring)',
+        'Active ground-effects & wing spoilers',
+        'Track-calibrated AI active dampers',
+        'Carbon ceramic brakes + Michelin Cup 2 R',
+        'Integrated telemetry & data log storage',
+        'Priority build allocation (12-mo delivery)'
       ],
-      cta: 'Get Started Now',
+      cta: 'Reserve Track Spec',
       popular: true
     },
     {
-      name: 'Enterprise',
+      name: 'Bespoke Signature',
       price: 'Custom',
-      period: 'tailored SLA',
-      desc: 'For high-volume web portals and complex pipeline orchestration.',
+      period: 'tailored commission',
+      desc: 'One-of-one custom commission built to your exact design blueprints.',
       features: [
-        'Dedicated SQLite Cluster/Sync',
-        'Unlimited Monthly Submissions',
-        'Custom AI Agent Fine-Tuning',
-        'Dedicated Technical Account Manager',
-        'SSO/SAML Secure Gateway Integration',
-        '24/7 Telephone & Zoom SLA Support'
+        'Custom hand-laid colored carbon-fiber weave',
+        'Tailored Italian Alcantara cabin design',
+        '1-on-1 access to Aetheria design lead',
+        'Dedicated trackside race engineer support',
+        'Global enclosed transporter delivery',
+        'Lifetime allocation maintenance support'
       ],
-      cta: 'Contact Enterprise',
+      cta: 'Inquire Bespoke Build',
       popular: false
     }
   ];
@@ -71,21 +72,21 @@ export default function Pricing() {
     <section id="pricing" className="pricing-section section">
       <div className="container">
         <div className="section-header">
-          <span className="tagline">Flexible Tiers</span>
-          <h2>Plans That Scale With You</h2>
-          <p>Start local for free, then upgrade to full security automation when you launch to real traffic.</p>
+          <span className="tagline">Allocation Tiers</span>
+          <h2>Secure Your Commission</h2>
+          <p>Select your base configuration tier. Every allocation reserves a slot in our security registry.</p>
         </div>
 
         <div className="pricing-grid">
           {tiers.map((tier, idx) => (
             <div key={idx} className={`pricing-card ${tier.popular ? 'popular glassmorphic-panel' : 'glassmorphic-panel'}`}>
-              {tier.popular && <span className="popular-badge">Most Popular</span>}
+              {tier.popular && <span className="popular-badge">Highly Requested</span>}
               <div className="tier-header">
                 <h3>{tier.name}</h3>
                 <p className="tier-desc">{tier.desc}</p>
                 <div className="price-container">
                   <span className="price-value">{tier.price}</span>
-                  {tier.price !== 'Custom' && <span className="price-period">/{tier.period}</span>}
+                  {tier.price !== 'Custom' && <span className="price-period"> | {tier.period}</span>}
                 </div>
               </div>
 

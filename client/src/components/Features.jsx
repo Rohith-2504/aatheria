@@ -1,38 +1,38 @@
 import React from 'react';
-import { Cpu, Database, Layers, Zap, ShieldCheck, BarChart3 } from 'lucide-react';
+import { Zap, Battery, Wind, Sliders, Shield, Activity } from 'lucide-react';
 import './Features.css';
 
 export default function Features() {
   const features = [
     {
-      icon: <Cpu size={24} />,
-      title: 'AI-Powered Parsing',
-      desc: 'Ingest contact message inputs and automatically classify customer intent, sentiment, or product interest categories.'
-    },
-    {
-      icon: <Database size={24} />,
-      title: 'SQLite Core Engine',
-      desc: 'All form submissions write instantly to a lightweight, blazing-fast SQLite instance managed via better-sqlite3.'
-    },
-    {
-      icon: <Layers size={24} />,
-      title: 'Visual Node Orchestrator',
-      desc: 'Map form triggers, conditional routers, third-party hooks, and databases in a unified, visual canvas.'
-    },
-    {
       icon: <Zap size={24} />,
-      title: 'Microsecond Execution',
-      desc: 'Engineered on an optimized Express and SQLite stack for sub-40ms client-to-database form submission cycles.'
+      title: '1,900 HP Tri-Motor Drivetrain',
+      desc: 'An ultra-high performance tri-motor setup delivering instant all-wheel vectoring, achieving 0-60 mph in a blistering 1.8 seconds.'
     },
     {
-      icon: <ShieldCheck size={24} />,
-      title: 'Double-Layer Validation',
-      desc: 'Client-side verification secures the UI, while regex-matched server-side scripts isolate backend databases.'
+      icon: <Battery size={24} />,
+      title: 'Quantum Battery Core',
+      desc: 'Next-generation solid-state battery architecture offering 500+ miles of range with 15-minute ultra-fast DC charging.'
     },
     {
-      icon: <BarChart3 size={24} />,
-      title: 'Live Ingestion Dashboard',
-      desc: 'Monitor submission counts, city distributions, and message statistics in a responsive administrator view.'
+      icon: <Wind size={24} />,
+      title: 'Active Aero Dynamics',
+      desc: 'Dynamic carbon splitters, active rear wing spoilers, and ground-effect venturi channels that automatically adapt to velocity.'
+    },
+    {
+      icon: <Sliders size={24} />,
+      title: 'AI Active Suspensions',
+      desc: 'Track-reading active dampers adjusting torque vectoring and ride height 1,000 times per second for unmatched stability.'
+    },
+    {
+      icon: <Shield size={24} />,
+      title: 'Monocoque Carbon Core',
+      desc: 'Ultra-lightweight pre-preg carbon-fiber tub designed for maximum structural rigidity, ensuring F1-level crash protection.'
+    },
+    {
+      icon: <Activity size={24} />,
+      title: 'Secure Telemetry Ledger',
+      desc: 'Cryptographically signed telematics, lap performance, and diagnostic logs committed directly to the secure onboard registry.'
     }
   ];
 
@@ -40,9 +40,9 @@ export default function Features() {
     <section id="features" className="features-section section">
       <div className="container">
         <div className="section-header">
-          <span className="tagline">Capabilities</span>
-          <h2>Engineered for Modern Teams</h2>
-          <p>Deploy a lightweight lead capture environment designed to run seamlessly in the cloud or on local hardware.</p>
+          <span className="tagline">Specifications</span>
+          <h2>Engineered for Absolute Performance</h2>
+          <p>The Aetheria Hyper-GT combines race-ready aerodynamics with bleeding-edge electric powertrain engineering.</p>
         </div>
 
         <div className="features-grid">
