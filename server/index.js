@@ -1,3 +1,4 @@
+// Aetheria Registry Portal Server Engine - Main API Endpoint Entry
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
