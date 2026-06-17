@@ -1,3 +1,4 @@
+// Aetheria Entrance Auth Panel - Client and Registry Controller Gateways
 import React, { useState } from 'react';
 import { Shield, User, Lock, Mail, ArrowRight, Loader2, Key } from 'lucide-react';
 import './Auth.css';
