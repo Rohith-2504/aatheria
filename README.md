@@ -1,22 +1,32 @@
-# AetherFlow — AI-Powered Workflow Ingestion Hub
+# Aatheria — High-Precision 3D Printing Service Portal
 
-AetherFlow is a modern, responsive, and secure full-stack product marketing website for a SaaS workflow orchestration tool. It integrates a lead capture form that writes entries directly to a persistent local SQLite database.
+Aatheria is a modern, responsive, and secure full-stack web application designed for a state-of-the-art industrial 3D printing and additive manufacturing service. It features an interactive client landing page, a CAD print quote builder, and an operator dashboard for queue metrics management backed by a local SQLite database.
+
+---
 
 ## 🚀 Key Features
 
-1. **Stunning UI/UX Design**: Interactive dark-themed layout built with HSL color variables, smooth transitions, glassmorphic panels, and custom typography (Outfit + Inter).
-2. **Double-Layer Validation**: Client-side validation in React provides real-time warnings (regex checks for mobile formats and email validity), and matching server-side validations in Express secure the database.
-3. **SQLite Database Inspector**: An interactive admin table rendered at the bottom of the lead section queries and displays stored submissions directly from the SQLite database.
-4. **Monorepo Architecture**: Clean separation between the React client and the Express backend, running concurrently in development and serving unified static assets in production.
+1. **Diagnostic Preloader**: Web preloader displaying mock calibration diagnostic logs (thermistors, bed leveling, stepper driver calibration) before loading the main site.
+2. **Slicer Pipeline Visualizer**: Interactive progress pipeline in the Hero section showing the G-code compile states (*Model Ingested -> Slicing G-Code -> Job Registered -> Printing Started*). Submitting a quote request reactively animates this pipeline.
+3. **Interactive 3D Print Quote Builder**: Form fields to select material tiers (PLA, SLA Resin, SLS Titanium) and specify layer heights, density, and custom dimensions. Includes client-side and server-side validation.
+4. **Hybrid Auth Portal**:
+   - **Client Portal**: Users can sign up for new accounts or sign in.
+   - **Operator Dashboard**: Locked to sign-in only, displaying default administrator credentials on screen and prefilling them for ease of testing.
+5. **Print Operator Dashboard (Admin)**: Detailed admin panel querying the database to show computed KPIs:
+   - **Total Revenue**: Live calculation representing completed print jobs.
+   - **Volume Printed**: Dynamic sum of output volume in cubic centimeters (cc).
+   - **Pending Queue**: Print runs awaiting slicing verification.
+   - **Total Jobs**: Total files queued in the ledger.
+6. **SQLite Raw Database Inspector**: Integrates a live database ledger on the operator screen displaying raw tables directly from SQLite.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React (Vite) + Vanilla CSS (Variables, Flexbox/Grid, Glassmorphic overlays) + Lucide Icons
+- **Frontend**: React (Vite) + Vanilla CSS (Glassmorphism & dark-neon styles) + Lucide Icons
 - **Backend**: Node.js + Express
 - **Database**: SQLite (via `better-sqlite3` native drivers)
-- **Tooling**: `concurrently` (multi-process developer workspace), `nodemon` (hot reloading)
+- **Tooling**: `concurrently` (concurrent client/server execution), `nodemon` (hot reloading)
 
 ---
 
@@ -26,15 +36,16 @@ AetherFlow is a modern, responsive, and secure full-stack product marketing webs
 pmwlf/
 ├── package.json         # Root scripts to orchestrate client & server
 ├── README.md            # Project documentation
+├── render.yaml          # Render blueprint deployment file
 ├── client/              # React frontend
 │   ├── package.json
 │   ├── vite.config.js   # Proxy configuration pointing to Express port 5000
 │   ├── index.html       # Fonts (Outfit/Inter) and SEO meta tags
 │   └── src/
 │       ├── main.jsx     # DOM entrypoint
-│       ├── App.jsx      # Aggregator of layout sections
+│       ├── App.jsx      # Page component router and session persist control
 │       ├── index.css    # Typography, global CSS variables, resets, and keyframes
-│       └── components/  # Page components and individual stylesheets
+│       └── components/  # Page components and stylesheets
 │           ├── Navbar.jsx / Navbar.css
 │           ├── Hero.jsx / Hero.css
 │           ├── Features.jsx / Features.css
@@ -46,8 +57,8 @@ pmwlf/
 │           └── Footer.jsx / Footer.css
 └── server/              # Express backend
     ├── package.json
-    ├── index.js         # REST endpoints, validations, and static assets server
-    ├── db.js            # SQLite database initialization
+    ├── index.js         # REST endpoints, authentication and status controller
+    ├── db.js            # SQLite database initialization & seeding
     ├── test-db.js       # Script to verify SQLite CRUD execution
     └── data/
         └── submissions.db # Generated SQLite database file
@@ -55,43 +66,16 @@ pmwlf/
 
 ---
 
-## 💾 Database Schema
+## 💾 Default Credentials
 
-The database table `submissions` is automatically generated at start inside `server/data/submissions.db` using the following SQL parameters:
+For convenience and direct verification, the system database is auto-seeded with the following default accounts:
 
-| Column Name | Data Type | Key Type | Constraint | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `id` | `INTEGER` | Primary Key | `AUTOINCREMENT` | Unique identifier for each lead. |
-| `full_name` | `TEXT` | - | `NOT NULL` | The full name of the user (2-100 chars). |
-| `mobile_number` | `TEXT` | - | `NOT NULL` | Checked phone format (7-15 digits). |
-| `email` | `TEXT` | - | `NOT NULL` | Checked standard email address format. |
-| `city` | `TEXT` | - | `NOT NULL` | City name of the contact (2-50 chars). |
-| `message` | `TEXT` | - | `NOT NULL` | Contact message (10-1000 chars). |
-| `created_at` | `DATETIME` | - | `DEFAULT CURRENT_TIMESTAMP` | Submission timestamp in UTC. |
-
----
-
-## 🛡️ Validation Constraints
-
-### 1. Full Name
-- Cannot be blank.
-- Must be between `2` and `100` characters.
-- Sanitized to match alphabetical characters, spaces, hyphens, and apostrophes only.
-
-### 2. Mobile Number
-- Regex matching: `/^\+?[0-9\s\-()]{7,20}$/`.
-- Sanitized digit character count must be between `7` and `15` numbers.
-
-### 3. Email Address
-- Regex matching: `/^[^\s@]+@[^\s@]+\.[^\s@]+$/` (Standard RFC 5322 structure check).
-
-### 4. City
-- Cannot be blank.
-- Must be between `2` and `50` characters.
-
-### 5. Message
-- Cannot be blank.
-- Must be between `10` and `1000` characters.
+- **Client Portal**:
+  - **Username**: `client`
+  - **Password**: `client123`
+- **Operator Dashboard (Admin)**:
+  - **Username**: `admin`
+  - **Password**: `admin123`
 
 ---
 
@@ -101,31 +85,31 @@ The database table `submissions` is automatically generated at start inside `ser
 Make sure you have Node.js (v18+) and npm installed on your system.
 
 ### 1. Install Dependencies
-Run the command below in the project root folder. This will automatically install packages in the root, the `server/` directory, and the `client/` directory:
+Run the command below in the project root folder to install client and server packages:
 ```bash
 npm run install-all
 ```
 
-### 2. Run Database Diagnostics (Optional)
+### 2. Run Database Diagnostics
 To verify SQLite initialization and CRUD operations:
 ```bash
 node server/test-db.js
 ```
 
 ### 3. Run Development Servers
-Start both the React dev server (port 3000) and the Express backend (port 5000) concurrently:
+Start both the React Vite dev server (port 5173) and the Express backend (port 5000) concurrently:
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) to view the portal. Submitting forms will send requests to the Express port via Vite's proxy.
+Open [http://localhost:5173](http://localhost:5173) to view the portal. 
 
 ### 4. Build and Run Production Server
-Compile the React files and boot the single-process Express production environment (which hosts the static bundle):
+Compile the React frontend bundle and host it via the unified Express production backend:
 ```bash
-# Build Vite React client
+# Build React client
 npm run build
 
-# Start Express server in production mode
+# Start server in production mode
 npm start
 ```
 Open [http://localhost:5000](http://localhost:5000) to access the production site.
@@ -134,12 +118,10 @@ Open [http://localhost:5000](http://localhost:5000) to access the production sit
 
 ## 🌐 Deployment Guidelines
 
-### Server Hosting (Render, Railway, VPS)
-To host AetherFlow on services like **Render** or **Railway**:
-1. Connect your GitHub repository.
-2. Set **Build Command** to: `npm run install-all && npm run build`
-3. Set **Start Command** to: `npm start`
-4. Set the environment variable `PORT` if needed (defaults to `5000`).
-5. *Note*: Since SQLite writes to a local file, files on ephemeral servers will reset when the server restarts or redeploys. To make database records persistent on Render/Railway, attach a **Persistent Volume Mount** mapped to `/server/data` or connect a PostgreSQL database.
+This project includes a render.yaml blueprint file for easy deployment on Render.
 
-**Live URL**: [Add your live URL here after deploying]
+1. Connect your fork of the repository to Render.
+2. Render will automatically detect the blueprint file to create a Web Service named aatheria.
+3. Set the environment variable PORT to specify the server port (defaults to 5000).
+4. Note on SQLite Persistence: Since SQLite writes database records locally, any redeployment or restart will reset the data. For production persistence, map a Persistent Volume Mount to /server/data.
+
