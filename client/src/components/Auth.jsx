@@ -1,6 +1,6 @@
 // Aatheria Entrance Auth Panel - Client and Registry Controller Gateways
 import React, { useState } from 'react';
-import { Shield, User, Lock, Mail, ArrowRight, Loader2, Key } from 'lucide-react';
+import { Shield, User, Lock, Mail, ArrowRight, Loader2 } from 'lucide-react';
 import './Auth.css';
 
 export default function Auth({ onAuthSuccess }) {
@@ -10,7 +10,6 @@ export default function Auth({ onAuthSuccess }) {
   const [formData, setFormData] = useState({
     username: 'client',
     password: 'client123',
-    confirmPassword: '',
     full_name: ''
   });
 
@@ -28,7 +27,7 @@ export default function Auth({ onAuthSuccess }) {
     setError('');
     setSuccess('');
 
-    const { username, password, confirmPassword, full_name } = formData;
+    const { username, password, full_name } = formData;
 
     if (!username.trim() || !password.trim()) {
       setError('Username and password are required.');
@@ -38,14 +37,6 @@ export default function Auth({ onAuthSuccess }) {
     if (isSignUp && !isAdmin) {
       if (!full_name.trim()) {
         setError('Full name is required.');
-        return;
-      }
-      if (password !== confirmPassword) {
-        setError('Passwords do not match.');
-        return;
-      }
-      if (password.length < 4) {
-        setError('Password must be at least 4 characters.');
         return;
       }
     }
@@ -74,7 +65,7 @@ export default function Auth({ onAuthSuccess }) {
           setFormData(prev => ({
             ...prev,
             password: '',
-            confirmPassword: ''
+            full_name: ''
           }));
           setTimeout(() => {
             setIsSignUp(false); // Switch back to Sign In form
@@ -123,7 +114,6 @@ export default function Auth({ onAuthSuccess }) {
               setFormData({
                 username: 'client',
                 password: 'client123',
-                confirmPassword: '',
                 full_name: ''
               });
             }}
@@ -140,7 +130,6 @@ export default function Auth({ onAuthSuccess }) {
               setFormData({
                 username: 'admin',
                 password: 'admin123',
-                confirmPassword: '',
                 full_name: ''
               });
             }}
@@ -226,24 +215,6 @@ export default function Auth({ onAuthSuccess }) {
             </div>
           </div>
 
-          {isSignUp && !isAdmin && (
-            <div className="auth-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <div className="auth-input-wrapper">
-                <Key size={16} className="auth-icon" />
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  placeholder="••••••••"
-                  required
-                />
-              </div>
-            </div>
-          )}
-
           <button type="submit" className="btn btn-primary auth-submit-btn" disabled={loading}>
             {loading ? (
               <>
@@ -269,7 +240,6 @@ export default function Auth({ onAuthSuccess }) {
                 setFormData({
                   username: '',
                   password: '',
-                  confirmPassword: '',
                   full_name: ''
                 });
               }}
