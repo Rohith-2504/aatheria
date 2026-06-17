@@ -68,12 +68,23 @@ export default function Auth({ onAuthSuccess }) {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setSuccess(isSignUp ? 'Registration successful! Signing you in...' : 'Sign in successful!');
-        
-        // Auto signin after signup or direct signin
-        setTimeout(() => {
-          onAuthSuccess(result.user);
-        }, 1000);
+        if (isSignUp) {
+          setSuccess('Successfully registered! Redirecting to sign in page...');
+          setFormData(prev => ({
+            ...prev,
+            password: '',
+            confirmPassword: ''
+          }));
+          setTimeout(() => {
+            setIsSignUp(false); // switch to Sign In form
+            setSuccess('');
+          }, 1500);
+        } else {
+          setSuccess('Sign in successful!');
+          setTimeout(() => {
+            onAuthSuccess(result.user);
+          }, 1000);
+        }
       } else {
         setError(result.message || 'Authentication failed. Please try again.');
       }
