@@ -207,7 +207,7 @@ export default function Hero({ onCtaClick }) {
             <button className="video-modal-close" onClick={() => setShowVideoModal(false)}>&times;</button>
             <div className="video-player-wrapper">
               <video 
-                src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-3d-printer-printing-a-prototype-41619-large.mp4" 
+                src="/Demo Video.mp4" 
                 controls 
                 autoPlay 
                 loop
