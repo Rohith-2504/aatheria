@@ -200,7 +200,7 @@ export default function LeadForm({ isHighlighted, user }) {
                 <p><strong>Queue Database:</strong> server/data/submissions.db</p>
                 <p><strong>Queue Table:</strong> submissions</p>
               </div>
-              <button onClick={handleResetForm} className="btn btn-primary">
+              <button onClick={handleResetForm} className="btn btn-primary" data-cursor-lock>
                 Configure Another Job
               </button>
             </div>
@@ -335,6 +335,7 @@ export default function LeadForm({ isHighlighted, user }) {
                 type="submit" 
                 disabled={isSubmitting} 
                 className="btn btn-primary submit-btn"
+                data-cursor-lock
               >
                 {isSubmitting ? (
                   <>

@@ -93,7 +93,7 @@ export default function AdminDashboard({ user, onLogout }) {
           <div className="admin-user-badge">
             <span className="user-indicator admin"></span>
             <span>Admin: <strong>{user?.full_name || user?.username}</strong></span>
-            <button onClick={onLogout} className="btn-logout" title="Exit Dashboard">
+            <button onClick={onLogout} className="btn-logout" title="Exit Dashboard" data-cursor-lock>
               <LogOut size={16} /> Log Out
             </button>
           </div>
@@ -151,7 +151,7 @@ export default function AdminDashboard({ user, onLogout }) {
       <div className="admin-table-card glassmorphic-panel">
         <div className="card-header-row">
           <h3>Active Print Queue</h3>
-          <button onClick={fetchAllocations} disabled={loading} className="btn btn-secondary refresh-btn">
+          <button onClick={fetchAllocations} disabled={loading} className="btn btn-secondary refresh-btn" data-cursor-lock>
             {loading ? <Loader2 size={14} className="spinner" /> : <RefreshCw size={14} />} Refresh Queue
           </button>
         </div>
@@ -215,6 +215,7 @@ export default function AdminDashboard({ user, onLogout }) {
                           disabled={updatingId === lead.id}
                           onClick={() => handleStatusToggle(lead.id, lead.status)}
                           className={`btn-action-status ${isSold ? 'revert' : 'confirm'}`}
+                          data-cursor-lock
                         >
                           {updatingId === lead.id ? (
                             <Loader2 size={12} className="spinner" />

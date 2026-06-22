@@ -1,0 +1,78 @@
+/* ==========================================
+   FORCE HIDE DEFAULT OS CURSOR
+   Only apply on devices with hover capabilities (desktops/laptops with mouse/trackpad)
+   ========================================== */
+@media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+  
+  /* Ensure the custom cursor shows up */
+  #cursor-core, #cursor-nebula {
+    display: block !important;
+  }
+}
+
+/* By default, hide custom cursor elements on mobile/touch screens */
+#cursor-core, #cursor-nebula {
+  display: none;
+}
+
+/* ==========================================
+   CURSOR DOM ELEMENTS
+========================================== */
+
+#cursor-core {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-secondary, #06b6d4);
+  box-shadow: 0 0 10px var(--color-secondary, #06b6d4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999; /* Ensure it stays on top of everything including modals */
+  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 0.15s ease;
+}
+
+#cursor-nebula {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(6, 182, 212, 0.25);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform-origin: center;
+  /* Transition morphing properties, but EXCLUDE transform for performance in physics loop */
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-radius 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.25s ease, 
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+/* Supernova shockwave on mouse down */
+.supernova-shockwave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99997;
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  animation: shockwave 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shockwave {
+  0%   { transform: translate3d(-50%, -50%, 0) scale(1); opacity: 0.8; }
+  100% { transform: translate3d(-50%, -50%, 0) scale(7); opacity: 0; }
+}

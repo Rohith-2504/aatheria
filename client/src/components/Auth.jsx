@@ -107,6 +107,7 @@ export default function Auth({ onAuthSuccess }) {
           <button 
             type="button"
             className={`role-btn ${!isAdmin ? 'active' : ''}`}
+            data-cursor-lock
             onClick={() => {
               setIsAdmin(false);
               setIsSignUp(false);
@@ -123,6 +124,7 @@ export default function Auth({ onAuthSuccess }) {
           <button 
             type="button"
             className={`role-btn ${isAdmin ? 'active' : ''}`}
+            data-cursor-lock
             onClick={() => {
               setIsAdmin(true);
               setIsSignUp(false);
@@ -215,7 +217,7 @@ export default function Auth({ onAuthSuccess }) {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary auth-submit-btn" disabled={loading}>
+          <button type="submit" className="btn btn-primary auth-submit-btn" disabled={loading} data-cursor-lock>
             {loading ? (
               <>
                 <Loader2 size={16} className="spinner" /> Authenticating...
@@ -233,6 +235,7 @@ export default function Auth({ onAuthSuccess }) {
             <button 
               type="button" 
               className="auth-toggle-link"
+              data-cursor-lock
               onClick={() => {
                 setIsSignUp(!isSignUp);
                 setError('');

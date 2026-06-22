@@ -41,7 +41,7 @@ export default function Testimonials() {
 
         <div className="testimonials-grid">
           {reviews.map((rev, idx) => (
-            <div key={idx} className="testimonial-card glassmorphic-panel">
+            <div key={idx} className="testimonial-card glassmorphic-panel" data-cursor-lock>
               <div className="stars-row">
                 {[...Array(rev.stars)].map((_, sIdx) => (
                   <Star key={sIdx} size={16} fill="var(--color-secondary)" color="var(--color-secondary)" />

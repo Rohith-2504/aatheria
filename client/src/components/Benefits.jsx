@@ -15,7 +15,7 @@ export default function Benefits() {
           </p>
 
           <div className="benefit-items">
-            <div className="benefit-item">
+            <div className="benefit-item" data-cursor-lock>
               <div className="benefit-icon">
                 <Check size={18} />
               </div>
@@ -25,7 +25,7 @@ export default function Benefits() {
               </div>
             </div>
 
-            <div className="benefit-item">
+            <div className="benefit-item" data-cursor-lock>
               <div className="benefit-icon">
                 <Check size={18} />
               </div>
@@ -35,7 +35,7 @@ export default function Benefits() {
               </div>
             </div>
 
-            <div className="benefit-item">
+            <div className="benefit-item" data-cursor-lock>
               <div className="benefit-icon">
                 <Check size={18} />
               </div>
@@ -52,6 +52,7 @@ export default function Benefits() {
             <img 
               src={printerImage} 
               alt="Aatheria Industrial SLS Printer" 
+              data-cursor-lock
               style={{
                 width: '100%',
                 maxWidth: '520px',

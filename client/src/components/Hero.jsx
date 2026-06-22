@@ -137,10 +137,10 @@ export default function Hero({ onCtaClick }) {
             Aatheria prints components with aerospace-grade carbon fiber and titanium. Upload your CAD designs, customize structural densities, and queue production immediately.
           </p>
           <div className="hero-actions">
-            <a href="#lead-form" onClick={handleCTA} className="btn btn-primary">
+            <a href="#lead-form" onClick={handleCTA} className="btn btn-primary" data-cursor-lock>
               Upload CAD & Quote <ArrowRight size="1.1em" />
             </a>
-            <button onClick={() => setShowVideoModal(true)} className="btn btn-secondary">
+            <button onClick={() => setShowVideoModal(true)} className="btn btn-secondary" data-cursor-lock>
               <Play size="1em" /> Watch Demo
             </button>
           </div>
@@ -175,6 +175,7 @@ export default function Hero({ onCtaClick }) {
                       }
                     }}
                     style={{ '--node-theme': node.color }}
+                    data-cursor-lock
                   >
                     <div className="node-icon-wrapper" style={{ backgroundColor: node.color + '15', color: node.color }}>
                       {node.icon}
@@ -204,7 +205,7 @@ export default function Hero({ onCtaClick }) {
       {showVideoModal && (
         <div className="video-modal-overlay" onClick={() => setShowVideoModal(false)}>
           <div className="video-modal-content glassmorphic-panel" onClick={(e) => e.stopPropagation()}>
-            <button className="video-modal-close" onClick={() => setShowVideoModal(false)}>&times;</button>
+            <button className="video-modal-close" onClick={() => setShowVideoModal(false)} data-cursor-lock>&times;</button>
             <div className="video-player-wrapper">
               <video 
                 src="/Demo Video.mp4" 

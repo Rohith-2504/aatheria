@@ -79,7 +79,7 @@ export default function Pricing() {
 
         <div className="pricing-grid">
           {tiers.map((tier, idx) => (
-            <div key={idx} className={`pricing-card ${tier.popular ? 'popular glassmorphic-panel' : 'glassmorphic-panel'}`}>
+            <div key={idx} className={`pricing-card ${tier.popular ? 'popular glassmorphic-panel' : 'glassmorphic-panel'}`} data-cursor-lock>
               {tier.popular && <span className="popular-badge">Highly Requested</span>}
               <div className="tier-header">
                 <h3>{tier.name}</h3>
@@ -105,6 +105,7 @@ export default function Pricing() {
                 href="#lead-form" 
                 onClick={handleCTAClick}
                 className={`btn pricing-cta ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}
+                data-cursor-lock
               >
                 {tier.cta}
               </a>

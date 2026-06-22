@@ -47,6 +47,7 @@ export default function Faq() {
               key={idx} 
               className={`faq-item glassmorphic-panel ${activeIndex === idx ? 'open' : ''}`}
               onClick={() => toggleAccordion(idx)}
+              data-cursor-lock
             >
               <button className="faq-question">
                 <span>{faq.q}</span>

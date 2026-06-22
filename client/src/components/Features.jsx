@@ -47,7 +47,7 @@ export default function Features() {
 
         <div className="features-grid">
           {features.map((feat, idx) => (
-            <div key={idx} className="feature-card glassmorphic-panel">
+            <div key={idx} className="feature-card glassmorphic-panel" data-cursor-lock>
               <div className="feature-icon-box">
                 {feat.icon}
               </div>

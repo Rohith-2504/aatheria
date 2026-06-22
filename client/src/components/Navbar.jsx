@@ -45,35 +45,36 @@ export default function Navbar({ onCtaClick, user, onLogout }) {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="#" className="nav-logo" onClick={(e) => handleNavClick(e, 'hero')}>
+        <a href="#" className="nav-logo" onClick={(e) => handleNavClick(e, 'hero')} data-cursor-lock>
           <Printer className="logo-icon" size={24} />
           <span>AATHERIA</span>
         </a>
 
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <a href="#features" onClick={(e) => handleNavClick(e, 'features')}>Materials</a>
-          <a href="#benefits" onClick={(e) => handleNavClick(e, 'benefits')}>Process</a>
-          <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>Pricing</a>
-          <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')}>Feedback</a>
-          <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')}>FAQ</a>
+          <a href="#features" onClick={(e) => handleNavClick(e, 'features')} data-cursor-lock>Materials</a>
+          <a href="#benefits" onClick={(e) => handleNavClick(e, 'benefits')} data-cursor-lock>Process</a>
+          <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')} data-cursor-lock>Pricing</a>
+          <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')} data-cursor-lock>Feedback</a>
+          <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')} data-cursor-lock>FAQ</a>
           <a 
             href="#lead-form" 
             className="btn btn-primary nav-cta" 
             onClick={(e) => handleNavClick(e, 'lead-form')}
+            data-cursor-lock
           >
             Build Quote
           </a>
           {user && (
             <div className="nav-user-section">
               <span className="nav-username">Hi, {user.full_name || user.username}</span>
-              <button onClick={onLogout} className="btn-nav-logout">
+              <button onClick={onLogout} className="btn-nav-logout" data-cursor-lock>
                 Logout
               </button>
             </div>
           )}
         </div>
 
-        <button className="nav-hamburger" onClick={toggleMenu} aria-label="Toggle navigation">
+        <button className="nav-hamburger" onClick={toggleMenu} aria-label="Toggle navigation" data-cursor-lock>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>

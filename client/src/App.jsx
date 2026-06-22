@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import Auth from './components/Auth';
 import AdminDashboard from './components/AdminDashboard';
+import CustomCursor from './components/CustomCursor';
 
 export default function App() {
   const [highlightForm, setHighlightForm] = useState(false);
@@ -83,6 +84,7 @@ export default function App() {
 
   return (
     <>
+      <CustomCursor />
       {showLoader && <Preloader fade={fadeLoader} />}
       
       <div className={`app-layout-wrapper ${fadeLoader ? 'loaded' : ''}`}>
