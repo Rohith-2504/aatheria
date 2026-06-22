@@ -8,53 +8,76 @@
   }
   
   /* Ensure the custom cursor shows up */
-  #cursor-core, #cursor-nebula {
+  .cursor-fluid-container {
     display: block !important;
   }
 }
 
 /* By default, hide custom cursor elements on mobile/touch screens */
-#cursor-core, #cursor-nebula {
+.cursor-fluid-container {
   display: none;
 }
 
 /* ==========================================
-   CURSOR DOM ELEMENTS
+   FLUID CURSOR CONTAINER & BLENDS
 ========================================== */
 
-#cursor-core {
+.cursor-fluid-container {
   position: fixed;
   top: 0;
   left: 0;
-  width: 4px;
-  height: 4px;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999; /* Higher than modals and all other UI layers */
+  filter: url(#gooey-fluid);
+  mix-blend-mode: difference;
+}
+
+/* ==========================================
+   CORE & TRAILING BLOBS
+========================================== */
+
+.cursor-core {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
   background-color: #00F0FF;
-  box-shadow: 0 0 8px #00F0FF;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 99999; /* Ensure it stays on top of everything including modals */
   transform: translate3d(-50%, -50%, 0);
   transition: opacity 0.15s ease;
 }
 
-#cursor-nebula {
+.cursor-blob {
   position: fixed;
   top: 0;
   left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  background-color: #00F0FF;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 99998;
   transform-origin: center;
-  /* Transition morphing properties, but EXCLUDE transform for performance in physics loop */
+  /* We transition width, height, and border-radius for smooth morphing, but exclude transform for physics loop performance */
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
               height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-radius 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              background-color 0.25s ease, 
-              border-color 0.25s ease,
-              box-shadow 0.25s ease;
+              border-radius 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blob-1 {
+  width: 24px;
+  height: 24px;
+}
+
+.blob-2 {
+  width: 16px;
+  height: 16px;
+}
+
+.blob-3 {
+  width: 10px;
+  height: 10px;
 }
 
 /* Supernova shockwave on mouse down */
@@ -64,10 +87,10 @@
   left: 0;
   width: 12px;
   height: 12px;
-  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(0, 240, 255, 0.8);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 99997;
+  z-index: 999998;
   transform: translate3d(-50%, -50%, 0) scale(1);
   animation: shockwave 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
