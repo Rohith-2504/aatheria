@@ -71,12 +71,12 @@ export default function CustomCursor() {
         nebulaRef.current.style.transform += ' scale(0.8)';
       }
 
-      setTimeout(() => wave.remove(), 500);
+      setTimeout(() => wave.remove(), 400); // Supernova removes at exactly 400ms
     };
 
-    // Event delegation for mouseover/mouseout
+    // Event delegation for mouseover/mouseout (supports both data-cursor-snap and legacy data-cursor-lock)
     const handleMouseOver = (e) => {
-      const target = e.target.closest('[data-cursor-lock]');
+      const target = e.target.closest('[data-cursor-snap], [data-cursor-lock]');
       if (target) {
         hoverRef.current = { isHovering: true, element: target };
         
@@ -86,19 +86,19 @@ export default function CustomCursor() {
         
         if (nebulaRef.current) {
           const computedRadius = window.getComputedStyle(target).borderRadius;
-          nebulaRef.current.style.backgroundColor = 'rgba(6, 182, 212, 0.08)';
-          nebulaRef.current.style.borderColor = 'rgba(6, 182, 212, 0.8)';
+          nebulaRef.current.style.backgroundColor = 'rgba(0, 240, 255, 0.08)';
+          nebulaRef.current.style.borderColor = 'rgba(0, 240, 255, 0.8)';
           nebulaRef.current.style.borderRadius = computedRadius;
-          nebulaRef.current.style.boxShadow = '0 0 16px rgba(6, 182, 212, 0.4)';
+          nebulaRef.current.style.boxShadow = '0 0 16px rgba(0, 240, 255, 0.4)';
         }
       }
     };
 
     const handleMouseOut = (e) => {
-      const target = e.target.closest('[data-cursor-lock]');
+      const target = e.target.closest('[data-cursor-snap], [data-cursor-lock]');
       if (target) {
         // Prevent trigger if moving to a child within the same lock target
-        if (e.relatedTarget && e.relatedTarget.closest('[data-cursor-lock]') === target) {
+        if (e.relatedTarget && e.relatedTarget.closest('[data-cursor-snap], [data-cursor-lock]') === target) {
           return;
         }
 
@@ -112,7 +112,7 @@ export default function CustomCursor() {
           nebulaRef.current.style.width = '36px';
           nebulaRef.current.style.height = '36px';
           nebulaRef.current.style.backgroundColor = 'transparent';
-          nebulaRef.current.style.borderColor = 'rgba(6, 182, 212, 0.25)';
+          nebulaRef.current.style.borderColor = 'rgba(0, 240, 255, 0.4)';
           nebulaRef.current.style.borderRadius = '50%';
           nebulaRef.current.style.boxShadow = 'none';
         }
@@ -144,12 +144,12 @@ export default function CustomCursor() {
         let dx = mouse.x - pos.x;
         let dy = mouse.y - pos.y;
 
-        // LERP trail movement (0.16 stiffness for smooth, heavy tail)
-        pos.x += dx * 0.16;
-        pos.y += dy * 0.16;
+        // LERP trail movement with friction coefficient of exactly 0.15
+        pos.x += dx * 0.15;
+        pos.y += dy * 0.15;
 
-        let velX = dx * 0.16;
-        let velY = dy * 0.16;
+        let velX = dx * 0.15;
+        let velY = dy * 0.15;
         let speed = Math.sqrt(velX * velX + velY * velY);
 
         // Update angle of rotation
@@ -185,7 +185,7 @@ export default function CustomCursor() {
         pos.x += (targetCenterX - pos.x) * 0.28;
         pos.y += (targetCenterY - pos.y) * 0.28;
 
-        // Nebula expands to outline the targeted element with minor breathing room padding
+        // Nebula expands to outline the targeted element with exactly 6px of padding on each side (+12px total width/height)
         nebula.style.width  = `${rect.width + 12}px`;
         nebula.style.height = `${rect.height + 12}px`;
 
