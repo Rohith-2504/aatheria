@@ -1,0 +1,292 @@
+/* ==========================================
+   HOBBIES & CRICKET GAME STYLE SHEET
+   ========================================== */
+
+.hobbies-section {
+  min-height: 100vh;
+  padding: 120px 0 60px 0;
+  background-color: var(--bg-darker, #040508);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.1) 0%, transparent 60%),
+    radial-gradient(circle at 10% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hobbies-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hobbies-container {
+    grid-template-columns: 320px 1fr;
+  }
+}
+
+/* Sidebar Dashboard */
+.hobbies-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Game Info and Instruction Card */
+.instructions-card {
+  padding: 24px;
+  border-radius: var(--border-radius-md, 16px);
+  background: var(--bg-card, rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.07));
+  backdrop-filter: var(--glass-blur, blur(16px));
+}
+
+.instructions-card h3 {
+  font-family: var(--font-heading, inherit);
+  color: #fff;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.instructions-card ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.instructions-card li {
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #9ca3af);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.instructions-card li strong {
+  color: var(--color-secondary, #06b6d4);
+}
+
+.instructions-bullet {
+  color: var(--color-primary, #7c3aed);
+  margin-top: 2px;
+}
+
+/* Statistics scoreboard */
+.scoreboard-card {
+  padding: 24px;
+  border-radius: var(--border-radius-md, 16px);
+  background: rgba(6, 182, 212, 0.02);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  backdrop-filter: var(--glass-blur, blur(16px));
+  box-shadow: 0 8px 32px rgba(6, 182, 212, 0.05);
+}
+
+.scoreboard-card h3 {
+  color: var(--color-secondary, #06b6d4);
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: var(--color-text-muted, #9ca3af);
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  color: #fff;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+.stat-value.score {
+  color: var(--color-secondary, #06b6d4);
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.stat-value.wickets {
+  color: var(--color-error, #f43f5e);
+}
+
+/* Main Arena Card */
+.game-arena-card {
+  border-radius: var(--border-radius-md, 16px);
+  background: var(--bg-card, rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.07));
+  backdrop-filter: var(--glass-blur, blur(16px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Canvas styling */
+.game-canvas {
+  background: linear-gradient(to bottom, #111d13 0%, #17381e 100%);
+  display: block;
+  max-width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
+}
+
+/* Screenshake class */
+.screenshake {
+  animation: shake 0.2s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-4px, 4px); }
+  40% { transform: translate(4px, -4px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+}
+
+/* Game State Overlay Buttons */
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(4, 5, 8, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  text-align: center;
+  padding: 30px;
+}
+
+.game-overlay h2 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff 40%, var(--color-text-muted, #9ca3af) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+}
+
+.game-overlay.game-over h2 {
+  background: linear-gradient(135deg, #ff4e50, #f9d423);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.game-overlay p {
+  color: var(--color-text-muted, #9ca3af);
+  margin-bottom: 30px;
+  max-width: 480px;
+  font-size: 1rem;
+}
+
+.game-overlay .stats-summary {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--color-text-dark, #6b7280);
+  margin-bottom: 4px;
+}
+
+.summary-val {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: monospace;
+}
+
+/* Sound toggle controls in top-right of canvas card */
+.game-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 24px;
+  background: rgba(0,0,0,0.2);
+}
+
+.game-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-title-row h4 {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.game-mode-badge {
+  padding: 2px 8px;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: var(--color-secondary, #06b6d4);
+  font-size: 0.75rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.arena-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.control-btn-icon {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted, #9ca3af);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.control-btn-icon.active {
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--color-secondary, #06b6d4);
+  border-color: rgba(6, 182, 212, 0.3);
+}

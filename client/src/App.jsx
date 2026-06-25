@@ -13,6 +13,7 @@ import Preloader from './components/Preloader';
 import Auth from './components/Auth';
 import AdminDashboard from './components/AdminDashboard';
 import CustomCursor from './components/CustomCursor';
+import Hobbies from './components/Hobbies';
 
 export default function App() {
   const [highlightForm, setHighlightForm] = useState(false);
@@ -22,6 +23,29 @@ export default function App() {
   // Authentication and Routing States
   const [user, setUser] = useState(null);
   const [route, setRoute] = useState('auth'); // 'auth' | 'user-portal' | 'admin-dashboard'
+  
+  // HTML5 History API Path Router State
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    
+    // Intercept manual history pushes to trigger state update
+    const originalPushState = window.history.pushState;
+    window.history.pushState = function(...args) {
+      originalPushState.apply(window.history, args);
+      handleLocationChange();
+    };
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.history.pushState = originalPushState;
+    };
+  }, []);
 
   useEffect(() => {
     // Check local storage for active user session
@@ -89,25 +113,35 @@ export default function App() {
       
       <div className={`app-layout-wrapper ${fadeLoader ? 'loaded' : ''}`}>
         <div className="app-layout">
-          {route === 'auth' && (
-            <Auth onAuthSuccess={handleAuthSuccess} />
-          )}
-
-          {route === 'admin-dashboard' && (
-            <AdminDashboard user={user} onLogout={handleLogout} />
-          )}
-
-          {route === 'user-portal' && (
+          {currentPath.toLowerCase() === '/hobbies' ? (
             <>
               <Navbar onCtaClick={triggerFormHighlight} user={user} onLogout={handleLogout} />
-              <Hero onCtaClick={triggerFormHighlight} />
-              <Features />
-              <Benefits />
-              <Pricing />
-              <Testimonials />
-              <Faq />
-              <LeadForm isHighlighted={highlightForm} user={user} />
+              <Hobbies />
               <Footer />
+            </>
+          ) : (
+            <>
+              {route === 'auth' && (
+                <Auth onAuthSuccess={handleAuthSuccess} />
+              )}
+
+              {route === 'admin-dashboard' && (
+                <AdminDashboard user={user} onLogout={handleLogout} />
+              )}
+
+              {route === 'user-portal' && (
+                <>
+                  <Navbar onCtaClick={triggerFormHighlight} user={user} onLogout={handleLogout} />
+                  <Hero onCtaClick={triggerFormHighlight} />
+                  <Features />
+                  <Benefits />
+                  <Pricing />
+                  <Testimonials />
+                  <Faq />
+                  <LeadForm isHighlighted={highlightForm} user={user} />
+                  <Footer />
+                </>
+              )}
             </>
           )}
         </div>

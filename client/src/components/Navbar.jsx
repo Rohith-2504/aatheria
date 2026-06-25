@@ -23,6 +23,25 @@ export default function Navbar({ onCtaClick, user, onLogout }) {
   const handleNavClick = (e, id) => {
     e.preventDefault();
     setIsOpen(false);
+    
+    if (window.location.pathname !== '/') {
+      // If we are not on home path, go home first, then scroll
+      window.history.pushState({}, '', '/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          window.scrollTo({
+            top: elementRect - bodyRect - offset,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       const offset = 80; // height of the navbar
@@ -42,6 +61,12 @@ export default function Navbar({ onCtaClick, user, onLogout }) {
     }
   };
 
+  const handleHobbiesClick = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+    window.history.pushState({}, '', '/Hobbies');
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
@@ -56,6 +81,7 @@ export default function Navbar({ onCtaClick, user, onLogout }) {
           <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')} data-cursor-lock>Pricing</a>
           <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')} data-cursor-lock>Feedback</a>
           <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')} data-cursor-lock>FAQ</a>
+          <a href="/Hobbies" onClick={handleHobbiesClick} data-cursor-lock>Hobbies</a>
           <a 
             href="#lead-form" 
             className="btn btn-primary nav-cta" 
